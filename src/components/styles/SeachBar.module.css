@@ -1,0 +1,25 @@
+.input{
+    margin: 1vh 5vh;
+    background-color: #fff;
+    width: 30vw;
+    height: 5vh;
+    min-height: 40px;
+    border-radius: 10vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.5em;
+    padding-left: 1vw;
+    border: none;
+}
+
+.input:focus{
+    outline: 2px solid aqua;
+    background-color: #fffbfb;
+    color: black;
+}
+
+.input::placeholder{
+    margin-left: 30px;
+    color: #b9b9b9;
+}

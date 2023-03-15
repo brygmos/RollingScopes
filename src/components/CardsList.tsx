@@ -1,14 +1,12 @@
 import React from 'react';
 import { cards } from '../../API';
 import CardItem from './CardItem';
+import cl from './styles/CardList.module.css';
 
 class CardsList extends React.Component {
-  // state: State = {
-  //   field: '',
-  // };
   render() {
     return (
-      <div>
+      <div className={cl.cardList}>
         {cards.map((card) => (
           <CardItem card={card} key={card.id} />
         ))}

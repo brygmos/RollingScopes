@@ -1,4 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import cl from './styles/CardItem.module.css';
+import { faEye, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 type State = {
   card: string;
@@ -7,11 +10,15 @@ type State = {
 type CardType = {
   id: number;
   title: string;
-  author?: object;
+  author?: author;
   views?: string;
   likes?: number;
   bookmarked?: boolean;
   image?: string;
+};
+type author = {
+  firstname: string;
+  lastname: string;
 };
 
 type Props = {
@@ -25,12 +32,18 @@ class CardItem extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <div className={cl.card}>
+        <img className={cl.img} src={this.props.card.image} alt="card image" />
         <h1>{this.props.card.title}</h1>
-        <h1>id {this.props.card.id}</h1>
-        <span>views {this.props.card.views}</span>
-        <span>likes {this.props.card.likes}</span>
-        <img src={this.props.card.image} alt="card image" />
+        <p>
+          Author:
+          <span>{this.props.card.author?.firstname}</span>
+          <span> {this.props.card.author?.lastname}</span>
+        </p>
+        <FontAwesomeIcon icon={faEye} />
+        <span>{this.props.card.views}</span>
+        <FontAwesomeIcon icon={faThumbsUp} />
+        <span>{this.props.card.likes}</span>
       </div>
     );
   }

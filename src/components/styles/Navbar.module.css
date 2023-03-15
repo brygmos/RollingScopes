@@ -1,0 +1,19 @@
+.navbar{
+    background-color: aqua;
+    flex: 1;
+    height: 5vh;
+    min-height: 40px;
+    border-radius: 10vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navlink{
+    color: black;
+    font-size: 1.5em;
+}
+
+.navlink:hover{
+    text-decoration: none;
+}

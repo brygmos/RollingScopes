@@ -1,11 +1,16 @@
 type CardsType = {
   id: number;
   title: string;
-  author?: object;
+  author?: author;
   views?: string;
   likes?: number;
   bookmarked?: boolean;
   image?: string;
+};
+
+type author = {
+  firstname: string;
+  lastname: string;
 };
 
 export const cards: CardsType[] = [

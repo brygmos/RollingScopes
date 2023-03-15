@@ -1,4 +1,5 @@
 import React from 'react';
+import cl from './styles/SeachBar.module.css';
 
 type State = {
   finder: string;
@@ -19,8 +20,8 @@ class SearchBar extends React.Component<State> {
   render() {
     return (
       <div>
-        <h1>Searchbar</h1>
         <input
+          className={cl.input}
           value={this.state.finder}
           placeholder={'Search...'}
           type="text"
