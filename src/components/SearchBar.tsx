@@ -13,13 +13,13 @@ class SearchBar extends React.Component<State> {
     this.setState({ finder: finderValue });
   };
   componentWillUnmount(): void {
-    localStorage.setItem('finder', this.state.finder || 'hhh');
+    localStorage.setItem('finder', this.state.finder || '');
   }
 
   render() {
     return (
       <div>
-        <h1>searchbar</h1>
+        <h1>Searchbar</h1>
         <input
           value={this.state.finder}
           placeholder={'Search...'}
