@@ -7,11 +7,15 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    overflow: hidden;
 }
 
 .navlink{
+    width: 100%;
+    text-align: center;
     color: black;
     font-size: 1.5em;
+    line-height: 5vh;
 }
 
 .navlink:hover{
