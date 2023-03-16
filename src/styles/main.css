@@ -14,3 +14,7 @@ h1{
 p{
   margin: 0;
 }
+.container{
+  width: 1000px;
+  margin: auto;
+}

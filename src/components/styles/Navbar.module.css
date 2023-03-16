@@ -1,7 +1,8 @@
 .navbar{
+    margin: 1vh 5vh;
     background-color: aqua;
     flex: 1;
-    height: 5vh;
+    height: 50px;
     min-height: 40px;
     border-radius: 10vw;
     display: flex;

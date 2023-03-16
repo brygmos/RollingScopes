@@ -1,8 +1,12 @@
+.container{
+    width: 100%;
+    display: flex;
+}
 .input{
+    flex: 1;
     margin: 1vh 5vh;
     background-color: #fff;
-    width: 30vw;
-    height: 5vh;
+    height: 50px;
     min-height: 40px;
     border-radius: 10vw;
     display: flex;

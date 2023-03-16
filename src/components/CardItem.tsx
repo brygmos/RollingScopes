@@ -29,10 +29,15 @@ class CardItem extends React.Component<Props, State> {
   state: State = {
     card: '',
   };
-
+  handleClick = (e: React.SyntheticEvent): void => {
+    // const finderValue = e.currentTarget.value;
+    // this.setState({ finder: finderValue });
+    console.log(e.currentTarget);
+    console.log(e.target);
+  };
   render() {
     return (
-      <div className={cl.card}>
+      <div className={cl.card} onClick={(e) => this.handleClick(e)}>
         <img className={cl.img} src={this.props.card.image} alt="card image" />
         <div className={cl.textContent}>
           <div className={cl.header}>

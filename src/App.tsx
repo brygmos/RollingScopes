@@ -4,13 +4,22 @@ import AppRouter from './components/AppRouter';
 import Header from './components/Header';
 import './styles/App.css';
 
-function App() {
+export function App() {
   return (
-    <BrowserRouter>
+    <>
+      {/*<h1>Hello world</h1>*/}
       <Header />
       <AppRouter />
+    </>
+  );
+}
+
+function WrappedApp() {
+  return (
+    <BrowserRouter>
+      <App />
     </BrowserRouter>
   );
 }
 
-export default App;
+export default WrappedApp;

@@ -2,7 +2,7 @@ import AboutUs from '../pages/AboutUs';
 import NotFound from '../pages/NotFound';
 import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Main from './Main';
+import Main from '../pages/Main';
 
 const AppRouter: FC = () => {
   return (

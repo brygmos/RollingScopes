@@ -1,5 +1,14 @@
 .cardList{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0 auto;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    max-width: 1200px;
 }

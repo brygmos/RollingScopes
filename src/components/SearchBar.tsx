@@ -19,7 +19,7 @@ class SearchBar extends React.Component<State> {
 
   render() {
     return (
-      <div>
+      <div className={cl.container}>
         <input
           className={cl.input}
           value={this.state.finder}

@@ -6,10 +6,12 @@ import cl from './styles/CardList.module.css';
 class CardsList extends React.Component {
   render() {
     return (
-      <div className={cl.cardList}>
-        {cards.map((card) => (
-          <CardItem card={card} key={card.id} />
-        ))}
+      <div className={cl.container}>
+        <div className={cl.cardList}>
+          {cards.map((card) => (
+            <CardItem card={card} key={card.id} />
+          ))}
+        </div>
       </div>
     );
   }
