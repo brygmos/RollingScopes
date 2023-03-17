@@ -22,7 +22,11 @@ class SearchBar extends React.Component {
   render(): JSX.Element {
     return (
       <div className={cl.container}>
+        <label htmlFor="searchbar" hidden={true}>
+          Search...
+        </label>
         <input
+          id={'searchbar'}
           className={cl.input}
           value={this.state.finder}
           placeholder={'Search...'}

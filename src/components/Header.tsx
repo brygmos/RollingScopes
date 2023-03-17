@@ -5,9 +5,9 @@ import cl from './styles/Header.module.css';
 
 const Header: FC = (): JSX.Element => {
   return (
-    <div className={cl.header}>
+    <header className={cl.header}>
       <Navbar />
-    </div>
+    </header>
   );
 };
 

@@ -5,7 +5,7 @@ import cl from './styles/Navbar.module.css';
 
 const Navbar: FC = (): JSX.Element => {
   return (
-    <div className={cl.navbar}>
+    <nav role={'navigation'} className={cl.navbar}>
       <NavLink className={cl.navlink} to="/">
         Main
       </NavLink>
@@ -18,7 +18,7 @@ const Navbar: FC = (): JSX.Element => {
       <NavLink className={cl.navlink} to="/qwerty">
         NotExistingPage
       </NavLink>
-    </div>
+    </nav>
   );
 };
 

@@ -13,7 +13,7 @@ type author = {
   lastname: string;
 };
 
-export const cards: CardsType[] = [
+const cards: CardsType[] = [
   {
     id: 0,
     title: 'Title',
@@ -84,3 +84,7 @@ export const cards: CardsType[] = [
       'https://sun9-81.userapi.com/impg/VqrmbztEXnas1uCpDD4OpEz9QGUDADW_PxRXQw/C0LDQUtsEDM.jpg?size=537x240&quality=96&sign=9a063dcc6adf27537a6d9184a2c06c7a&type=share',
   },
 ];
+
+export function getCardsByFakeAPI(): CardsType[] {
+  return cards;
+}
