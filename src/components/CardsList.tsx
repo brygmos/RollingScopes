@@ -4,7 +4,7 @@ import CardItem from './CardItem';
 import cl from './styles/CardList.module.css';
 
 class CardsList extends React.Component {
-  render() {
+  render(): JSX.Element {
     return (
       <div className={cl.container}>
         <div className={cl.cardList}>

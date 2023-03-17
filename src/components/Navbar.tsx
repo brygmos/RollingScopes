@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import cl from './styles/Navbar.module.css';
 
-const Navbar: FC = () => {
+const Navbar: FC = (): JSX.Element => {
   return (
     <div className={cl.navbar}>
       <NavLink className={cl.navlink} to="/">

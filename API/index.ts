@@ -1,7 +1,7 @@
 type CardsType = {
   id: number;
   title: string;
-  author?: author;
+  author: author;
   views?: string;
   likes?: number;
   bookmarked?: boolean;
@@ -35,7 +35,7 @@ export const cards: CardsType[] = [
   },
   {
     id: 2,
-    title: 'Another title',
+    title: 'Long title in few strings',
     author: { firstname: 'Ivan', lastname: 'Ivanov' },
     views: '4363',
     likes: 54,
@@ -46,7 +46,7 @@ export const cards: CardsType[] = [
   {
     id: 3,
     title: 'Another title',
-    author: { firstname: 'Ivan', lastname: 'Ivanov' },
+    author: { firstname: 'Ivan', lastname: 'Ivanov ibn suleyman hattab naseri abdul' },
     views: '4363',
     likes: 54,
     bookmarked: false,
@@ -57,7 +57,7 @@ export const cards: CardsType[] = [
     id: 4,
     title: 'Another title',
     author: { firstname: 'Ivan', lastname: 'Ivanov' },
-    views: '4363',
+    views: '436565555555555555553',
     likes: 54,
     bookmarked: false,
     image:

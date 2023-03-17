@@ -5,19 +5,21 @@ type State = {
   finder: string;
 };
 
-class SearchBar extends React.Component<State> {
+class SearchBar extends React.Component {
   state: State = {
     finder: localStorage.getItem('finder') || '',
   };
+
   handleFinder = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const finderValue = e.currentTarget.value;
     this.setState({ finder: finderValue });
   };
+
   componentWillUnmount(): void {
-    localStorage.setItem('finder', this.state.finder || '');
+    localStorage.setItem('finder', this.state.finder);
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <div className={cl.container}>
         <input
