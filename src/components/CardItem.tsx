@@ -3,11 +3,7 @@ import React from 'react';
 import cl from './styles/CardItem.module.css';
 import { faBookmark, faEye, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
-type State = {
-  card: string;
-};
-
-type CardType = {
+export type CardType = {
   id: number;
   title: string;
   author?: author;
@@ -19,6 +15,10 @@ type CardType = {
 type author = {
   firstname: string;
   lastname: string;
+};
+
+type State = {
+  card: string;
 };
 
 type Props = {

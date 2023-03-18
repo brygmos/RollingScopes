@@ -21,12 +21,6 @@ const Navbar: FC = (): JSX.Element => {
       >
         Error
       </NavLink>
-      <NavLink
-        className={({ isActive }) => (isActive ? cl.navlink_active : cl.navlink)}
-        to="/qwerty"
-      >
-        NotExistingPage
-      </NavLink>
     </nav>
   );
 };
