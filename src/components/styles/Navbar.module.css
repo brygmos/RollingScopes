@@ -14,11 +14,19 @@
 .navlink{
     width: 100%;
     text-align: center;
-    color: black;
     font-size: 1.5em;
     line-height: 5vh;
+    color: black;
 }
 
 .navlink:hover{
     text-decoration: none;
+}
+
+.navlink_active{
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 5vh;
+    color: white;
 }

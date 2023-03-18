@@ -6,16 +6,25 @@ import cl from './styles/Navbar.module.css';
 const Navbar: FC = (): JSX.Element => {
   return (
     <nav role={'navigation'} className={cl.navbar}>
-      <NavLink className={cl.navlink} to="/">
+      <NavLink className={({ isActive }) => (isActive ? cl.navlink_active : cl.navlink)} to="/">
         Main
       </NavLink>
-      <NavLink className={cl.navlink} to="/about">
+      <NavLink
+        className={({ isActive }) => (isActive ? cl.navlink_active : cl.navlink)}
+        to="/about"
+      >
         About
       </NavLink>
-      <NavLink className={cl.navlink} to="/notfound">
+      <NavLink
+        className={({ isActive }) => (isActive ? cl.navlink_active : cl.navlink)}
+        to="/notfound"
+      >
         Error
       </NavLink>
-      <NavLink className={cl.navlink} to="/qwerty">
+      <NavLink
+        className={({ isActive }) => (isActive ? cl.navlink_active : cl.navlink)}
+        to="/qwerty"
+      >
         NotExistingPage
       </NavLink>
     </nav>
