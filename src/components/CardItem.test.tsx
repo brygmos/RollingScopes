@@ -2,8 +2,6 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
 import { describe, expect, it } from 'vitest';
-import { App } from '../App';
-import { MemoryRouter } from 'react-router-dom';
 import CardItem from './CardItem';
 
 const testCard = {
@@ -18,13 +16,6 @@ const testCard = {
 };
 
 describe('CardItem', () => {
-  // it('Renders page', () => {
-  //   render(
-  //     <MemoryRouter initialEntries={['/']}>
-  //       <App />
-  //     </MemoryRouter>
-  //   );
-  // });
   it(' correctly gets data', () => {
     //ARRANGE
     render(<CardItem card={testCard} />);

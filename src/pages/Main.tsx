@@ -4,7 +4,7 @@ import CardList from '../components/CardsList';
 import SearchBar from '../components/SearchBar';
 import { getCardsByFakeAPI } from '../../API';
 
-const AppRouter: FC = (): JSX.Element => {
+const Main: FC = (): JSX.Element => {
   return (
     <>
       <SearchBar />
@@ -13,4 +13,4 @@ const AppRouter: FC = (): JSX.Element => {
   );
 };
 
-export default AppRouter;
+export default Main;

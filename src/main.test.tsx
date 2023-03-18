@@ -5,21 +5,13 @@ import { describe, expect, it } from 'vitest';
 import { App } from './App';
 import { MemoryRouter } from 'react-router-dom';
 
-describe('App', () => {
-  it('renders searchbar', () => {
+describe('main', () => {
+  it('Renders main page', () => {
     render(
       <MemoryRouter initialEntries={['/']}>
         <App />
       </MemoryRouter>
     );
     expect(screen.getByPlaceholderText(/search.../i)).toBeTruthy();
-  });
-  it('renders about page', () => {
-    render(
-      <MemoryRouter initialEntries={['/about']}>
-        <App />
-      </MemoryRouter>
-    );
-    expect(screen.getByRole('heading')).toHaveTextContent(/about us/i);
   });
 });

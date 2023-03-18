@@ -11,6 +11,6 @@ describe('CardList', () => {
     render(<CardList cards={getCardsByFakeAPI()} />);
     //ACT
     //expect
-    expect(screen.getByText('Title')).toBeInTheDOM();
+    expect(screen.getByText('Title')).toBeTruthy();
   });
 });

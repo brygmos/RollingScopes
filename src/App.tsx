@@ -13,7 +13,7 @@ export function App() {
   );
 }
 
-function WrappedApp() {
+function RouterWrappedApp() {
   return (
     <BrowserRouter>
       <App />
@@ -21,4 +21,4 @@ function WrappedApp() {
   );
 }
 
-export default WrappedApp;
+export default RouterWrappedApp;

@@ -25,6 +25,7 @@
 
 .navlink_active{
     width: 100%;
+    text-decoration: none;
     text-align: center;
     font-size: 1.5em;
     line-height: 5vh;
