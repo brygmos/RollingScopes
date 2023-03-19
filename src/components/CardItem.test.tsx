@@ -17,10 +17,8 @@ const testCard = {
 
 describe('CardItem', () => {
   it(' correctly gets data', () => {
-    //ARRANGE
     render(<CardItem card={testCard} />);
-    //ACT
-    //expect
+
     expect(screen.getByRole('heading')).toHaveTextContent('Card title');
     expect(screen.getByText('card firstname')).toHaveTextContent('firstname');
   });

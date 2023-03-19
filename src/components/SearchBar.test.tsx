@@ -11,15 +11,14 @@ describe('SearchBar', () => {
     render(<SearchBar />);
     //ACT
     //expect
-    expect(screen.getByPlaceholderText('Search...')).toHaveTextContent('');
+    expect(screen.getByPlaceholderText(/search.../i)).toHaveTextContent('');
   });
   it('correctly gets input text', () => {
-    //ARRANGE
     render(<SearchBar />);
-    //ACT
-    const bar = screen.getByPlaceholderText('Search...');
+
+    const bar = screen.getByPlaceholderText(/search.../i);
     fireEvent.change(bar, { target: { value: 'abc' } });
-    //expect
+
     expect(bar).toHaveValue('abc');
   });
 });

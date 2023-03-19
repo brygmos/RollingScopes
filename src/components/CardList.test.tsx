@@ -7,10 +7,8 @@ import { getCardsByFakeAPI } from '../../API';
 
 describe('CardList', () => {
   it(' renders children', () => {
-    //ARRANGE
     render(<CardList cards={getCardsByFakeAPI()} />);
-    //ACT
-    //expect
+
     expect(screen.getByText('Title')).toBeTruthy();
   });
 });

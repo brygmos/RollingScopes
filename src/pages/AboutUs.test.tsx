@@ -13,12 +13,11 @@ describe('App', () => {
         <App />
       </MemoryRouter>
     );
+    expect(screen.getByRole('heading')).toBeTruthy();
   });
   it('Title is not empty', () => {
-    //ARRANGE
     render(<AboutUs />);
-    //ACT
-    //expect
+
     expect(screen.getByRole('heading')).toHaveTextContent('About us');
   });
 });

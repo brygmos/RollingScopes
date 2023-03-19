@@ -13,13 +13,12 @@ describe('NotFound', () => {
         <App />
       </MemoryRouter>
     );
+
     expect(screen.getByRole('heading')).toHaveTextContent('Not found');
   });
   it('Header is not empty', () => {
-    //ARRANGE
     render(<NotFound />);
-    //ACT
-    //expect
+
     expect(screen.getByRole('heading')).toHaveTextContent('Not found');
   });
 });

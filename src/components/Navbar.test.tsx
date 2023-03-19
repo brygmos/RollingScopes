@@ -7,17 +7,15 @@ import { MemoryRouter } from 'react-router-dom';
 
 describe('Navbar', () => {
   it('correctly change class on click', () => {
-    //ARRANGE
-    // render(<RouterWrappedApp />);
     render(
       <MemoryRouter initialEntries={['/banana']}>
         <Navbar />
       </MemoryRouter>
     );
-    //ACT
+
     const about = screen.getByText('About');
     fireEvent.click(about);
-    //expect;
+
     expect(about).toHaveClass('_navlink_active_eba153');
   });
 });
