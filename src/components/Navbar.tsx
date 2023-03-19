@@ -15,10 +15,7 @@ const Navbar: FC = (): JSX.Element => {
       >
         About
       </NavLink>
-      <NavLink
-        className={({ isActive }) => (isActive ? cl.navlink_active : cl.navlink)}
-        to="/notfound"
-      >
+      <NavLink className={({ isActive }) => (isActive ? cl.navlink_active : cl.navlink)} to="/404">
         Error
       </NavLink>
     </nav>

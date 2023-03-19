@@ -13,6 +13,7 @@ class SearchBar extends React.Component {
   handleFinder = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const finderValue = e.currentTarget.value;
     this.setState({ finder: finderValue });
+    console.log(window.location.href);
   };
 
   componentWillUnmount(): void {
