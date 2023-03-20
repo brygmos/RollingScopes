@@ -1,0 +1,12 @@
+.form__field{
+    background-color: #4d4d4d;
+    display: flex;
+    flex-direction: column;
+    padding: 2vh;
+    border-radius: 20px;
+
+}
+
+.form__field input{
+    margin: 2vh;
+}

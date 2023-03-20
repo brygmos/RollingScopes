@@ -15,6 +15,7 @@ p{
   margin: 0;
 }
 .container{
-  width: 1000px;
-  margin: auto;
+  max-width: 1000px;
+  text-align: center;
+  margin-top: 50px;
 }

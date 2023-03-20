@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
 
 const NotFound: FC = (): JSX.Element => {
-  return <h1>404: Not found</h1>;
+  return (
+    <div className={'container'}>
+      <h1>Error 404: not found</h1>
+    </div>
+  );
 };
 
 export default NotFound;
