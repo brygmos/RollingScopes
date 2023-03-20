@@ -1,12 +1,98 @@
 .form__field{
+    box-sizing: border-box;
     background-color: #4d4d4d;
     display: flex;
     flex-direction: column;
+    /*align-items: center;*/
+    margin: auto;
     padding: 2vh;
-    border-radius: 20px;
-
+    border-radius: 30px;
 }
 
-.form__field input{
-    margin: 2vh;
+/*.form__field input, select {*/
+.form__field input[type="text"], input[type="email"], input[type="date"], input[type="submit"], select{
+    margin: 2vh 0;
+    background-color: #fff;
+    min-height: 40px;
+    border-radius: 10vw;
+    font-size: 1.2em;
+    padding: 0 1vw;
+    border: none;
+}
+
+.form__field select:focus, input:focus{
+    outline: 2px solid aqua;
+    background-color: #fffbfb;
+    color: black;
+}
+
+.form__field input::placeholder{
+    margin: 0 30px;
+    color: #b9b9b9;
+}
+
+.form__field fieldset{
+    width: 279px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+:root {
+    --form-control-color: aqua;
+    --form-control-disabled: #959495;
+}
+
+.form-control--disabled {
+    color: var(--form-control-disabled);
+    cursor: not-allowed;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    background-color: #fff;
+    margin: 10px auto;
+    width: 2em;
+    height: 1em;
+    border-radius: 0.3em;
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 1em;
+    height: 1em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 80ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+input[type="checkbox"]:focus {
+    outline: max(2px, 0.15em) solid aqua;
+}
+
+.type_radio {
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-radius: 10vw;
+}
+
+input[type="file"] {
+    margin: auto;
+}
+
+input[type="submit"] {
+    background-color: aqua;
 }

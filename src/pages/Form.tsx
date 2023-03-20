@@ -9,22 +9,29 @@ const Form: FC = (): JSX.Element => {
         <input type="text" placeholder={'Your name...'} />
         <input type="text" placeholder={'Your surname...'} />
         <input type="email" placeholder={'Email...'} />
-        <fieldset>
-          <p>Please select your role:</p>
+        <label>birthday date:</label>
+        <input type="date" />
+        <div className={cl.type_radio}>
+          <label>select your role:</label>
           <input type="radio" id="html" name="fav_language" value="tutor" />
           <label htmlFor="html">Tutor</label>
           <input type="radio" id="css" name="fav_language" value="student" />
           <label htmlFor="css">Student</label>
-        </fieldset>
+        </div>
         <br />
-        <label htmlFor="cars">Choose a car:</label>
+        <label htmlFor="cars">choose a car:</label>
         <select id="cars" name="cars">
           <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
           <option value="fiat">Fiat</option>
           <option value="audi">Audi</option>
         </select>
-        <input type="image" alt={'avatar'} />
+        <label htmlFor="file-upload" className={cl.customFileInput}>
+          upload avatar:
+        </label>
+        <br />
+        <input type="file" />
+        <br />
         <label htmlFor="checkAgreement">Agree to data processing:</label>
         <input id={'checkAgreement'} type="checkbox" />
         <input type="submit" value={'Register'} />
