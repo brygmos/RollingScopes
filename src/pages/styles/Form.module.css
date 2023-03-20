@@ -9,7 +9,6 @@
     border-radius: 30px;
 }
 
-/*.form__field input, select {*/
 .form__field input[type="text"], input[type="email"], input[type="date"], input[type="submit"], select{
     margin: 2vh 0;
     background-color: #fff;
