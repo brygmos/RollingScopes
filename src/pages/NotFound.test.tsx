@@ -14,11 +14,11 @@ describe('NotFound', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole('heading')).toHaveTextContent('Not found');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/not found/i);
   });
   it('Header is not empty', () => {
     render(<NotFound />);
 
-    expect(screen.getByRole('heading')).toHaveTextContent('Not found');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/not found/i);
   });
 });

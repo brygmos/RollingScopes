@@ -19,7 +19,7 @@ describe('CardItem', () => {
   it(' correctly gets data', () => {
     render(<CardItem card={testCard} />);
 
-    expect(screen.getByRole('heading')).toHaveTextContent('Card title');
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Card title');
     expect(screen.getByText('card firstname')).toHaveTextContent('firstname');
   });
 });

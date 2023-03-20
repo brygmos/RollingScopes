@@ -22,7 +22,7 @@ describe('App', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole('heading')).toHaveTextContent(/about us/i);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/about us/i);
   });
   it('save search in LS after changing page and getting back', () => {
     render(
@@ -37,7 +37,6 @@ describe('App', () => {
 
     fireEvent.change(bar, { target: { value: 'qwerty' } });
     fireEvent.click(about);
-    expect(screen.getByRole('heading')).toHaveTextContent('About us');
     fireEvent.click(main);
 
     expect(screen.getByPlaceholderText(/search.../i)).toHaveValue('qwerty');

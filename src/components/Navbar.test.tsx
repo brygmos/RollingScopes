@@ -9,7 +9,7 @@ describe('Navbar', () => {
   it('correctly change class on click', () => {
     render(
       <MemoryRouter initialEntries={['/banana']}>
-        <Navbar />
+        <Navbar updateTitle={() => {}} />
       </MemoryRouter>
     );
 
