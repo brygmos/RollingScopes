@@ -1,0 +1,22 @@
+html,
+body {
+  background-color: #161616;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+h1{
+  margin: 0;
+}
+
+p{
+  margin: 0;
+}
+.container{
+  max-width: 1000px;
+  text-align: center;
+  margin-top: 50px;
+}
