@@ -10,7 +10,7 @@ const AppRouter: FC = (): JSX.Element => {
     <Routes>
       <Route element={<Main />} path={'/'} />
       <Route element={<AboutUs />} path={'/about'} />
-      <Route element={<Form />} path={'/form'} />
+      <Route element={<Form card={''} />} path={'/form'} />
       <Route element={<NotFound />} path={'*'} />
     </Routes>
   );
