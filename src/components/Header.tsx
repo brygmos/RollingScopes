@@ -25,13 +25,13 @@ export class Header extends React.Component<ComponentProps, ComponentState> {
   render(): React.ReactNode {
     return (
       <header className={cl.header}>
-        <h2 className="headerTitle" role="headerTitle">
-          {this.state.title === '/'
-            ? 'main'
-            : this.state.title === '/about'
-            ? 'about'
-            : '/ error 404'}
-        </h2>
+        {/*<h2 className="headerTitle" role="headerTitle">*/}
+        {/*  {this.state.title === '/'*/}
+        {/*    ? 'main'*/}
+        {/*    : this.state.title === '/about'*/}
+        {/*    ? 'about'*/}
+        {/*    : '/ error 404'}*/}
+        {/*</h2>*/}
         <Navbar updateTitle={this.updateTitle} />
       </header>
     );

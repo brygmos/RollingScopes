@@ -33,9 +33,9 @@ export class Navbar extends React.Component<ComponentProps, ComponentState> {
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? cl.navlink_active : cl.navlink)}
-          to="/404"
+          to="/form"
         >
-          Error
+          Form
         </NavLink>
       </nav>
     );
