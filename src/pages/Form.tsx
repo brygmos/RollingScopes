@@ -42,7 +42,7 @@ class Form extends React.Component<Props, State> {
     setTimeout(() => {
       this.validateForm(e);
     }, 100);
-    createCard();
+    // createCard();
   }
 
   validateForm(e: React.FormEvent): boolean {
