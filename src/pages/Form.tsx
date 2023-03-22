@@ -87,6 +87,30 @@ class Form extends React.Component<Props, State> {
       return true;
     }
   }
+  // TODO common validate method
+
+  // validateSomeNameField(refPrefix: string) {
+  //   this.setFormStatus(false);
+  //   // const refName = refPrefix + 'Ref';
+  //   const refName = 'fileUrl';
+  //   const regex = new RegExp(/[A-Z][a-z]*/g);
+  //   // const value = this[refName as keyof Form]?.current?.value || '';
+  //   if (value.length <= 1) {
+  //     this.setState({ nameError: 'Field is required' });
+  //     return;
+  //   } else if (!regex.test(value)) {
+  //     this.setState({ nameError: 'First letter should be capital' });
+  //     return;
+  //   } else {
+  //     this.setState({ nameError: '' });
+  //   }
+  //   this.setFormStatus(true);
+  // }
+
+  // validateCapital(word: string) {
+  //   const regex = new RegExp(/[A-Z][a-z]*/g);
+  //
+  // }
 
   validateNameField() {
     this.setFormStatus(false);

@@ -1,11 +1,16 @@
 type CardsType = {
-  id: number;
-  title: string;
-  author: author;
+  id?: number;
+  title?: string;
+  author?: author;
   views?: string;
   likes?: number;
   bookmarked?: boolean;
   image?: string;
+  email?: string;
+  role?: string;
+  selector?: string;
+  date?: string;
+  category?: string;
 };
 
 type author = {
@@ -28,6 +33,7 @@ const cards: CardsType[] = [
     title: 'Another title',
     author: { firstname: 'Ivan', lastname: 'Ivanov' },
     views: '4363',
+    role: 'student',
     likes: 54,
     bookmarked: false,
     image:
@@ -40,6 +46,7 @@ const cards: CardsType[] = [
     views: '4363',
     likes: 54,
     bookmarked: false,
+    category: 'fghj',
     image:
       'https://sun9-81.userapi.com/impg/VqrmbztEXnas1uCpDD4OpEz9QGUDADW_PxRXQw/C0LDQUtsEDM.jpg?size=537x240&quality=96&sign=9a063dcc6adf27537a6d9184a2c06c7a&type=share',
   },
@@ -70,6 +77,7 @@ const cards: CardsType[] = [
     views: '4363',
     likes: 54,
     bookmarked: false,
+    category: 'fgh',
     image:
       'https://sun9-81.userapi.com/impg/VqrmbztEXnas1uCpDD4OpEz9QGUDADW_PxRXQw/C0LDQUtsEDM.jpg?size=537x240&quality=96&sign=9a063dcc6adf27537a6d9184a2c06c7a&type=share',
   },

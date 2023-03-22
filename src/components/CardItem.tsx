@@ -38,7 +38,9 @@ class CardItem extends React.Component<Props, State> {
   render(): JSX.Element {
     return (
       <div className={cl.card}>
-        <img className={cl.img} src={this.props.card.image} alt="card image" />
+        {this.props.card.image && (
+          <img className={cl.img} src={this.props.card.image} alt="card image" />
+        )}
         <div className={cl.textContent}>
           <div className={cl.header}>
             <h1>{this.props.card.title}</h1>
@@ -47,21 +49,15 @@ class CardItem extends React.Component<Props, State> {
               <a href="#">
                 <span>{this.props.card.author?.firstname}</span>
                 <span> {this.props.card.author?.lastname}</span>
-                <span> {this.props.card.role}</span>
+                {this.props.card.role && <span> ({this.props.card.role})</span>}
               </a>
             </p>
-            <p>
-              Category:
-              <a href="#">
-                <span>{this.props.card.category}</span>
-              </a>
-            </p>
-            <p>
-              Date of creation:
-              <a href="#">
-                <span>{this.props.card.date}</span>
-              </a>
-            </p>
+            {this.props.card.category && (
+              <p>
+                Category:<a href="#">{this.props.card.category}</a>
+              </p>
+            )}
+            {this.props.card.date && <p>Date of creation: {this.props.card.date}</p>}
           </div>
           <div className={cl.btns}>
             <div className={cl.like}>
