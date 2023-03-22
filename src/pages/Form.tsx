@@ -2,6 +2,7 @@ import React from 'react';
 import cl from './styles/Form.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { CardType } from '../components/CardItem';
 
 type State = {
   formIsValid: boolean;
@@ -9,15 +10,21 @@ type State = {
   nameVisited: boolean;
   surnameError: string;
   surnameVisited: boolean;
+  fileUrl: string;
 };
 
 type Props = {
-  card: string;
+  formHandler: (card: CardType) => void;
+  lastId: number;
 };
 
 class Form extends React.Component<Props, State> {
   nameRef: React.RefObject<HTMLInputElement>;
   surnameRef: React.RefObject<HTMLInputElement>;
+  dateRef: React.RefObject<HTMLInputElement>;
+  radioRef: React.RefObject<HTMLInputElement>;
+  titleRef: React.RefObject<HTMLInputElement>;
+  categoryRef: React.RefObject<HTMLSelectElement>;
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -26,9 +33,35 @@ class Form extends React.Component<Props, State> {
       nameVisited: false,
       surnameError: '',
       surnameVisited: false,
+      fileUrl: '',
     };
     this.nameRef = React.createRef();
     this.surnameRef = React.createRef();
+    this.dateRef = React.createRef();
+    this.radioRef = React.createRef();
+    this.titleRef = React.createRef();
+    this.categoryRef = React.createRef();
+  }
+
+  onFileUpload = (event: React.BaseSyntheticEvent) => {
+    this.setState({ fileUrl: URL.createObjectURL(event.target.files[0]) });
+  };
+
+  setFormObject() {
+    const card: CardType = {
+      id: this.props.lastId + 1,
+      title: this.titleRef.current?.value || '',
+      date: this.dateRef.current?.value || '',
+      author: {
+        firstname: this.nameRef.current?.value || '',
+        lastname: this.surnameRef.current?.value || '',
+      },
+      email: this.nameRef.current?.value || '',
+      role: this.radioRef.current?.checked ? this.radioRef.current?.value : 'student',
+      category: this.categoryRef.current?.value ? this.categoryRef.current.value : 'selecttt',
+      image: this.state.fileUrl || '',
+    };
+    this.props.formHandler(card);
   }
   setFormStatus(status: boolean) {
     this.setState({ formIsValid: status });
@@ -39,20 +72,20 @@ class Form extends React.Component<Props, State> {
 
   submitForm(e: React.FormEvent) {
     e.preventDefault();
-    setTimeout(() => {
-      this.validateForm(e);
-    }, 100);
-    // createCard();
+    this.validateForm(e);
   }
 
   validateForm(e: React.FormEvent): boolean {
-    e.preventDefault();
+    console.log(e);
     this.validateNameField();
     this.validateSurnameField();
     if (!this.state.formIsValid) {
       alert('Form is invalid!');
       return false;
-    } else return true;
+    } else {
+      this.setFormObject();
+      return true;
+    }
   }
 
   validateNameField() {
@@ -101,30 +134,6 @@ class Form extends React.Component<Props, State> {
     }
   }
 
-  // render() {
-  //   return (
-  //     <div className={'container'}>
-  //       <form
-  //         onSubmit={(event) => {
-  //           this.validateForm(event);
-  //         }}
-  //         onBlur={(event) => {
-  //           this.handleBlur(event);
-  //         }}
-  //         className={cl.form__field}
-  //       >
-  //         <input id="name" type="text" ref={this.nameRef} placeholder={'Your name...'} />
-  //         <span>{this.state.nameError}</span>
-  //         <input id="surname" type="text" ref={this.surnameRef} placeholder={'Your surname...'} />
-  //         {this.state.surnameVisited && this.state.surnameVisited && (
-  //           <span>{this.state.surnameError}</span>
-  //         )}
-  //         <input type="submit" value={'Register'} />
-  //       </form>
-  //     </div>
-  //   );
-  // }
-
   render() {
     return (
       <div className={'container'}>
@@ -139,24 +148,33 @@ class Form extends React.Component<Props, State> {
           action="#"
         >
           <h1>Form</h1>
-          <input id="name" type="text" ref={this.nameRef} placeholder={'Your name...'} />
+          <input id="name" type="text" ref={this.nameRef} placeholder={'Your name'} />
           <span>{this.state.nameError}</span>
-          <input id="surname" type="text" ref={this.surnameRef} placeholder={'Your surname...'} />
+          <input id="surname" type="text" ref={this.surnameRef} placeholder={'Your surname'} />
           <span>{this.state.surnameError}</span>
-          <input type="email" placeholder={'Email...'} />
-          <label>birthday date:</label>
-          <input type="date" />
+          <input id="title" type="text" ref={this.titleRef} placeholder={'Title of card'} />
+          <label>Date of creation:</label>
+          <input type="date" ref={this.dateRef} />
           <div className={cl.type_radio}>
             <label>select your role:</label>
-            <input type="radio" id="html" name="fav_language" value="tutor" />
-            <label htmlFor="html">Tutor</label>
-            <input type="radio" id="css" name="fav_language" value="student" />
-            <label htmlFor="css">Student</label>
+            <input
+              ref={this.radioRef}
+              type="radio"
+              id="tutor"
+              name="role"
+              value="tutor"
+              defaultChecked={true}
+            />
+            <label htmlFor="tutor">Tutor</label>
+            <input type="radio" id="student" name="role" value="student" />
+            <label htmlFor="student">Student</label>
           </div>
           <br />
-          <label htmlFor="cars">choose a car:</label>
-          <select id="cars" name="cars">
-            <option value="volvo">Volvo</option>
+          <label htmlFor="cars">Category:</label>
+          <select id="select" name="category" ref={this.categoryRef}>
+            <option value="volvo" defaultChecked={true}>
+              Volvo
+            </option>
             <option value="saab">Saab</option>
             <option value="fiat">Fiat</option>
             <option value="audi">Audi</option>
@@ -164,8 +182,14 @@ class Form extends React.Component<Props, State> {
           <label htmlFor="file-upload" className={cl.customFileInput}>
             <i className="fa-solid fa-file-arrow-up"></i>
             <FontAwesomeIcon icon={faFileArrowUp} />
-            <span> upload avatar</span>
-            <input id={'file-upload'} type="file" />
+            <span> upload cover</span>
+            <input
+              id={'file-upload'}
+              onChange={(event) => {
+                this.onFileUpload(event);
+              }}
+              type="file"
+            />
           </label>
           <label htmlFor="checkAgreement">
             <div>
@@ -181,53 +205,3 @@ class Form extends React.Component<Props, State> {
 }
 
 export default Form;
-
-// render() {
-//   return (
-//     <div className={'container'}>
-//       <form
-//         onSubmit={(event) => {
-//           this.validateForm(event);
-//         }}
-//         className={cl.form__field}
-//         action="#"
-//       >
-//         <h1>Form</h1>
-//         <input id="name" type="text" ref={this.inputRef} placeholder={'Your name...'} />
-//         <input id="name" type="text" placeholder={'Your surname...'} />
-//         <input type="email" placeholder={'Email...'} />
-//         <label>birthday date:</label>
-//         <input type="date" />
-//         <div className={cl.type_radio}>
-//           <label>select your role:</label>
-//           <input type="radio" id="html" name="fav_language" value="tutor" />
-//           <label htmlFor="html">Tutor</label>
-//           <input type="radio" id="css" name="fav_language" value="student" />
-//           <label htmlFor="css">Student</label>
-//         </div>
-//         <br />
-//         <label htmlFor="cars">choose a car:</label>
-//         <select id="cars" name="cars">
-//           <option value="volvo">Volvo</option>
-//           <option value="saab">Saab</option>
-//           <option value="fiat">Fiat</option>
-//           <option value="audi">Audi</option>
-//         </select>
-//         <label htmlFor="file-upload" className={cl.customFileInput}>
-//           <i className="fa-solid fa-file-arrow-up"></i>
-//           <FontAwesomeIcon icon={faFileArrowUp} />
-//           <span> upload avatar</span>
-//           <input id={'file-upload'} type="file" />
-//         </label>
-//         <label htmlFor="checkAgreement">
-//           <div>
-//             <span>Agree to data processing: </span>
-//           </div>
-//           <input id={'checkAgreement'} type="checkbox" />
-//         </label>
-//         <input type="submit" value={'Register'} />
-//       </form>
-//     </div>
-//   );
-// }
-// }

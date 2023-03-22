@@ -4,13 +4,18 @@ import cl from './styles/CardItem.module.css';
 import { faBookmark, faEye, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 export type CardType = {
-  id: number;
-  title: string;
+  id?: number;
+  title?: string;
   author?: author;
   views?: string;
   likes?: number;
   bookmarked?: boolean;
   image?: string;
+  email?: string;
+  role?: string;
+  selector?: string;
+  date?: string;
+  category?: string;
 };
 type author = {
   firstname: string;
@@ -18,7 +23,7 @@ type author = {
 };
 
 type State = {
-  card: string;
+  card: CardType;
 };
 
 type Props = {
@@ -27,7 +32,7 @@ type Props = {
 
 class CardItem extends React.Component<Props, State> {
   state: State = {
-    card: '',
+    card: this.props.card,
   };
 
   render(): JSX.Element {
@@ -42,6 +47,19 @@ class CardItem extends React.Component<Props, State> {
               <a href="#">
                 <span>{this.props.card.author?.firstname}</span>
                 <span> {this.props.card.author?.lastname}</span>
+                <span> {this.props.card.role}</span>
+              </a>
+            </p>
+            <p>
+              Category:
+              <a href="#">
+                <span>{this.props.card.category}</span>
+              </a>
+            </p>
+            <p>
+              Date of creation:
+              <a href="#">
+                <span>{this.props.card.date}</span>
               </a>
             </p>
           </div>
