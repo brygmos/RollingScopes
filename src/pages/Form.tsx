@@ -82,6 +82,7 @@ class Form extends React.Component<Props, State> {
     };
     this.props.formHandler(card);
   }
+
   setFormStatus(status: boolean) {
     this.setState({ formIsValid: status });
   }
@@ -191,6 +192,7 @@ class Form extends React.Component<Props, State> {
           ></MyModal>
         )}
         <form
+          className={cl.form__field}
           ref={this.formRef}
           onSubmit={(event) => {
             this.submitForm(event);
@@ -198,63 +200,97 @@ class Form extends React.Component<Props, State> {
           onBlur={(event) => {
             this.handleBlur(event);
           }}
-          className={cl.form__field}
-          action="#"
         >
           <h1>Form</h1>
-          <input id="name" type="text" ref={this.nameRef} placeholder={'Your name'} />
-          <span className={cl.field__error}>{this.state.nameError}</span>
-          <input id="surname" type="text" ref={this.surnameRef} placeholder={'Your surname'} />
-          <span className={cl.field__error}>{this.state.surnameError}</span>
-          <input id="title" type="text" ref={this.titleRef} placeholder={'Title of card'} />
-          <span className={cl.field__error}>{this.state.titleError}</span>
-          <label>Date of creation:</label>
-          <input type="date" ref={this.dateRef} />
-          <span className={cl.field__error}>{this.state.dateError}</span>
-          <div className={cl.type_radio}>
-            <label>select your role:</label>
-            <input
-              ref={this.radioRef}
-              type="radio"
-              id="tutor"
-              name="role"
-              value="tutor"
-              defaultChecked={true}
-            />
-            <label htmlFor="tutor">Tutor</label>
-            <input type="radio" id="student" name="role" value="student" />
-            <label htmlFor="student">Student</label>
-          </div>
-          <br />
-          <label htmlFor="cars">Category:</label>
-          <select id="select" name="category" ref={this.categoryRef}>
-            <option value="volvo" defaultChecked={true}>
-              Volvo
-            </option>
-            <option value="saab">Saab</option>
-            <option value="fiat">Fiat</option>
-            <option value="audi">Audi</option>
-          </select>
-          <label htmlFor="file-upload" className={cl.customFileInput}>
-            <i className="fa-solid fa-file-arrow-up"></i>
-            <FontAwesomeIcon icon={faFileArrowUp} />
-            <span> upload cover</span>
-            <input
-              id={'file-upload'}
-              onChange={(event) => {
-                this.onFileUpload(event);
-              }}
-              type="file"
-            />
-          </label>
-          <span className={cl.fileName}>{this.state.fileName}</span>
-          <label htmlFor="checkAgreement">
-            <div>
-              <span>Agree to data processing: </span>
+          <div className={cl.input__container}>
+            <input id="name" type="text" ref={this.nameRef} placeholder={'Your name'} />
+            <div className={cl.input__message}>
+              <span className={cl.field__error}>{this.state.nameError}</span>
             </div>
-            <input id={'checkAgreement'} type="checkbox" ref={this.checkAgreementRef} />
-          </label>
-          <span className={cl.field__error}>{this.state.checkAgreementError}</span>
+          </div>
+
+          <div className={cl.input__container}>
+            <input id="surname" type="text" ref={this.surnameRef} placeholder={'Your surname'} />
+            <div className={cl.input__message}>
+              <p className={cl.field__error}>{this.state.surnameError}</p>
+            </div>
+          </div>
+
+          <div className={cl.input__container}>
+            <input id="title" type="text" ref={this.titleRef} placeholder={'Title'} />
+            <div className={cl.input__message}>
+              <p className={cl.field__error}>{this.state.titleError}</p>
+            </div>
+          </div>
+
+          <div className={cl.input__container}>
+            <div className={cl.type_radio}>
+              <label>select your role:</label>
+              <div>
+                <input
+                  ref={this.radioRef}
+                  type="radio"
+                  id="tutor"
+                  name="role"
+                  value="tutor"
+                  defaultChecked={true}
+                />
+                <label htmlFor="tutor">Tutor</label>
+                <input type="radio" id="student" name="role" value="student" />
+                <label htmlFor="student">Student</label>
+              </div>
+            </div>
+          </div>
+
+          <div className={cl.input__container}>
+            <div className={cl.select__label}>
+              <label htmlFor="cars">Category: </label>
+            </div>
+            <select id="select" name="category" ref={this.categoryRef}>
+              <option value="volvo" defaultChecked={true}>
+                Volvo
+              </option>
+              <option value="saab">Saab</option>
+              <option value="fiat">Fiat</option>
+              <option value="audi">Audi</option>
+            </select>
+            <div className={cl.input__message}></div>
+          </div>
+
+          <div className={cl.input__container}>
+            <div className={cl.customFileInput__container}>
+              <label htmlFor="file-upload">
+                <div className={cl.customFileInput}>
+                  <FontAwesomeIcon icon={faFileArrowUp} />
+                  <span> upload cover</span>
+                </div>
+                <input
+                  id={'file-upload'}
+                  onChange={(event) => {
+                    this.onFileUpload(event);
+                  }}
+                  type="file"
+                />
+              </label>
+            </div>
+
+            <div className={cl.input__message}>
+              <span className={cl.fileName}>{this.state.fileName}</span>
+            </div>
+          </div>
+
+          <div className={cl.input__container}>
+            <label htmlFor="checkAgreement">
+              <div>
+                <span>Agree to data processing: </span>
+              </div>
+              <input id={'checkAgreement'} type="checkbox" ref={this.checkAgreementRef} />
+            </label>
+            <div className={cl.input__message}>
+              <span className={cl.field__error}>{this.state.checkAgreementError}</span>
+            </div>
+          </div>
+
           <input type="submit" value={'Create card'} />
         </form>
       </div>
