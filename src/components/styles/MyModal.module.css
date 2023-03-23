@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.51);
+    background-color: rgba(0, 0, 0, 0.7);
     position: fixed;
     z-index: 100;
     top: 0;
@@ -13,7 +13,21 @@
 }
 
 .container{
-    padding: 10vh;
-    border-radius: 20px;
-    background-color: #464646;
+    max-width: 90%;
+    max-height: 90%;
+    padding: 20px;
+    border-radius: 30px;
+    background-color: #161616;
+}
+
+.warning{
+    color: #ff3535;
+}
+
+.success{
+    color: #01e001;
+}
+
+.neutral{
+    color: white;
 }

@@ -134,3 +134,8 @@ input[type="file"] {
     background-color: #00ffff;
     cursor: pointer;
 }
+
+.fileName{
+    font-size: 0.8em;
+    color: #01e001;
+}

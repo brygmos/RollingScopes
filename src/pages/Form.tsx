@@ -14,8 +14,11 @@ type State = {
   nameVisited: boolean;
   surnameVisited: boolean;
   fileUrl: string;
+  fileName: string;
   [key: string]: string | boolean;
   modalVisibility: boolean;
+  modalText: string;
+  modalTextType: string;
 };
 
 type Props = {
@@ -43,7 +46,10 @@ class Form extends React.Component<Props, State> {
       checkAgreementError: '',
       surnameVisited: false,
       fileUrl: '',
+      fileName: '',
       modalVisibility: false,
+      modalText: '',
+      modalTextType: 'neutral',
     };
     this.nameRef = React.createRef();
     this.surnameRef = React.createRef();
@@ -57,6 +63,7 @@ class Form extends React.Component<Props, State> {
 
   onFileUpload = (event: React.BaseSyntheticEvent) => {
     this.setState({ fileUrl: URL.createObjectURL(event.target.files[0]) });
+    this.setState({ fileName: event.target.files[0].name });
   };
 
   setFormObject() {
@@ -101,12 +108,12 @@ class Form extends React.Component<Props, State> {
     validate.then(() => {
       if (!this.getFormStatus()) {
         this.setFormStatus(false);
-        alert('Form is invalid!');
+        this.setModal(true, 'Invalid form info', 'warning');
       } else {
         this.setFormStatus(true);
         this.setFormObject();
         // this.formRef.current?.reset();
-        this.setModal(true);
+        this.setModal(true, 'Card was succesfully added', 'success');
       }
     });
   }
@@ -154,8 +161,20 @@ class Form extends React.Component<Props, State> {
     this.validateDate();
   }
 
-  setModal(bool: boolean) {
+  setModal(visible: boolean, text: string, type: string) {
+    this.setModalVisibility(visible);
+    this.setModalText(text);
+    this.setModalTextType(type);
+  }
+
+  setModalVisibility(bool: boolean) {
     this.setState({ modalVisibility: bool });
+  }
+  setModalText(string: string) {
+    this.setState({ modalText: string });
+  }
+  setModalTextType(string: string) {
+    this.setState({ modalTextType: string });
   }
 
   render() {
@@ -164,14 +183,12 @@ class Form extends React.Component<Props, State> {
         {this.state.modalVisibility && (
           <MyModal
             visible={this.state.modalVisibility}
-            setModal={() => {
-              this.setModal(false);
+            modalText={this.state.modalText}
+            messageType={this.state.modalTextType}
+            setModalVisibility={() => {
+              this.setModalVisibility(false);
             }}
-          >
-            <div>
-              <h1 className={'successMessage'}>Successfully added</h1>
-            </div>
-          </MyModal>
+          ></MyModal>
         )}
         <form
           ref={this.formRef}
@@ -230,6 +247,7 @@ class Form extends React.Component<Props, State> {
               type="file"
             />
           </label>
+          <span className={cl.fileName}>{this.state.fileName}</span>
           <label htmlFor="checkAgreement">
             <div>
               <span>Agree to data processing: </span>
