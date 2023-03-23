@@ -10,8 +10,10 @@
     max-width: 400px;
 }
 
-.form__field > span {
+.field__error {
     color: #ff3535;
+    margin-top: 0;
+    font-size: 0.9em;
 }
 
 .form__field input[type="text"], input[type="email"], input[type="date"], input[type="submit"], label[for="file-upload"], select{

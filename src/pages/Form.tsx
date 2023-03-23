@@ -3,14 +3,19 @@ import cl from './styles/Form.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { CardType } from '../components/CardItem';
+import MyModal from '../components/MyModal';
 
 type State = {
   formIsValid: boolean;
   nameError: string;
-  nameVisited: boolean;
   surnameError: string;
+  titleError: string;
+  checkAgreementError: string;
+  nameVisited: boolean;
   surnameVisited: boolean;
   fileUrl: string;
+  [key: string]: string | boolean;
+  modalVisibility: boolean;
 };
 
 type Props = {
@@ -25,15 +30,20 @@ class Form extends React.Component<Props, State> {
   radioRef: React.RefObject<HTMLInputElement>;
   titleRef: React.RefObject<HTMLInputElement>;
   categoryRef: React.RefObject<HTMLSelectElement>;
+  checkAgreementRef: React.RefObject<HTMLInputElement>;
+  formRef: React.RefObject<HTMLFormElement>;
   constructor(props: Props) {
     super(props);
     this.state = {
       formIsValid: false,
-      nameError: '',
       nameVisited: false,
+      nameError: '',
       surnameError: '',
+      titleError: '',
+      checkAgreementError: '',
       surnameVisited: false,
       fileUrl: '',
+      modalVisibility: false,
     };
     this.nameRef = React.createRef();
     this.surnameRef = React.createRef();
@@ -41,6 +51,8 @@ class Form extends React.Component<Props, State> {
     this.radioRef = React.createRef();
     this.titleRef = React.createRef();
     this.categoryRef = React.createRef();
+    this.checkAgreementRef = React.createRef();
+    this.formRef = React.createRef();
   }
 
   onFileUpload = (event: React.BaseSyntheticEvent) => {
@@ -58,7 +70,7 @@ class Form extends React.Component<Props, State> {
       },
       email: this.nameRef.current?.value || '',
       role: this.radioRef.current?.checked ? this.radioRef.current?.value : 'student',
-      category: this.categoryRef.current?.value ? this.categoryRef.current.value : 'selecttt',
+      category: this.categoryRef.current?.value ? this.categoryRef.current.value : 'select',
       image: this.state.fileUrl || '',
     };
     this.props.formHandler(card);
@@ -72,96 +84,97 @@ class Form extends React.Component<Props, State> {
 
   submitForm(e: React.FormEvent) {
     e.preventDefault();
-    this.validateForm(e);
+    this.validateForm();
   }
 
-  validateForm(e: React.FormEvent): boolean {
-    console.log(e);
-    this.validateNameField();
-    this.validateSurnameField();
-    if (!this.state.formIsValid) {
-      alert('Form is invalid!');
-      return false;
-    } else {
-      this.setFormObject();
-      return true;
-    }
+  validateForm(): void {
+    const validate = new Promise((resolve, reject) => {
+      this.setFormStatus(true);
+      this.validateSomeNameField('title');
+      this.validateSomeNameField('name');
+      this.validateSomeNameField('surname');
+      this.validateDate();
+      this.validateCheckAgreement();
+      resolve(null);
+    });
+
+    validate.then(() => {
+      if (!this.getFormStatus()) {
+        this.setFormStatus(false);
+        alert('Form is invalid!');
+      } else {
+        this.setFormStatus(true);
+        this.setFormObject();
+        // this.formRef.current?.reset();
+        this.setModal(true);
+      }
+    });
   }
-  // TODO common validate method
 
-  // validateSomeNameField(refPrefix: string) {
-  //   this.setFormStatus(false);
-  //   // const refName = refPrefix + 'Ref';
-  //   const refName = 'fileUrl';
-  //   const regex = new RegExp(/[A-Z][a-z]*/g);
-  //   // const value = this[refName as keyof Form]?.current?.value || '';
-  //   if (value.length <= 1) {
-  //     this.setState({ nameError: 'Field is required' });
-  //     return;
-  //   } else if (!regex.test(value)) {
-  //     this.setState({ nameError: 'First letter should be capital' });
-  //     return;
-  //   } else {
-  //     this.setState({ nameError: '' });
-  //   }
-  //   this.setFormStatus(true);
-  // }
-
-  // validateCapital(word: string) {
-  //   const regex = new RegExp(/[A-Z][a-z]*/g);
-  //
-  // }
-
-  validateNameField() {
-    this.setFormStatus(false);
-    const regex = new RegExp(/[A-Z][a-z]*/g);
-    const value: string = this.nameRef.current?.value || '';
+  validateSomeNameField(refPrefix = 'name') {
+    const refName = refPrefix + 'Ref';
+    const errorField = refPrefix + 'Error';
+    const regex = new RegExp(/[A-Z]|[А-я][a-z]|[а-я]*/g);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const value = this[refName as keyof React.LegacyRef<HTMLInputElement>]?.current?.value || '';
     if (value.length <= 1) {
-      this.setState({ nameError: 'Field is required' });
+      this.setFormStatus(false);
+      this.setState({ [`${errorField}`]: 'Field is required' });
       return;
     } else if (!regex.test(value)) {
-      this.setState({ nameError: 'First letter should be capital' });
+      this.setFormStatus(false);
+      this.setState({ [`${errorField}`]: 'First letter should be capital' });
       return;
     } else {
-      this.setState({ nameError: '' });
+      this.setState({ [`${errorField}`]: '' });
     }
-    this.setFormStatus(true);
   }
 
-  validateSurnameField() {
-    this.setFormStatus(false);
-    const regex = new RegExp(/[A-Z][a-z]*/g);
-    const value: string = this.surnameRef.current?.value || '';
-    if (value.length <= 1) {
-      this.setState({ surnameError: 'Field is required' });
+  validateDate() {
+    const today = new Date().getTime();
+    const userDate = new Date(this.dateRef.current?.value as string).getTime();
+    if (today < userDate) {
+      this.setFormStatus(false);
+      this.setState({ dateError: "Date can't be in future" });
       return;
-    } else if (!regex.test(value)) {
-      this.setState({ surnameError: 'First letter should be capital' });
-      return;
-    } else {
-      this.setState({ surnameError: '' });
     }
-    this.setFormStatus(true);
+  }
+  validateCheckAgreement() {
+    if (this.checkAgreementRef?.current?.checked == false) {
+      this.setFormStatus(false);
+      this.setState({ checkAgreementError: 'You need to agree' });
+      return;
+    }
   }
 
   handleBlur(e: React.BaseSyntheticEvent) {
     const fieldName = e.target.id;
-    switch (fieldName) {
-      case 'name':
-        this.setState({ nameVisited: true });
-        this.validateNameField();
-        break;
-      case 'surname':
-        this.setState({ surnameVisited: true });
-        this.validateSurnameField();
-        break;
-    }
+    this.validateSomeNameField(fieldName);
+    this.validateDate();
+  }
+
+  setModal(bool: boolean) {
+    this.setState({ modalVisibility: bool });
   }
 
   render() {
     return (
       <div className={'container'}>
+        {this.state.modalVisibility && (
+          <MyModal
+            visible={this.state.modalVisibility}
+            setModal={() => {
+              this.setModal(false);
+            }}
+          >
+            <div>
+              <h1 className={'successMessage'}>Successfully added</h1>
+            </div>
+          </MyModal>
+        )}
         <form
+          ref={this.formRef}
           onSubmit={(event) => {
             this.submitForm(event);
           }}
@@ -173,12 +186,14 @@ class Form extends React.Component<Props, State> {
         >
           <h1>Form</h1>
           <input id="name" type="text" ref={this.nameRef} placeholder={'Your name'} />
-          <span>{this.state.nameError}</span>
+          <span className={cl.field__error}>{this.state.nameError}</span>
           <input id="surname" type="text" ref={this.surnameRef} placeholder={'Your surname'} />
-          <span>{this.state.surnameError}</span>
+          <span className={cl.field__error}>{this.state.surnameError}</span>
           <input id="title" type="text" ref={this.titleRef} placeholder={'Title of card'} />
+          <span className={cl.field__error}>{this.state.titleError}</span>
           <label>Date of creation:</label>
           <input type="date" ref={this.dateRef} />
+          <span className={cl.field__error}>{this.state.dateError}</span>
           <div className={cl.type_radio}>
             <label>select your role:</label>
             <input
@@ -219,8 +234,9 @@ class Form extends React.Component<Props, State> {
             <div>
               <span>Agree to data processing: </span>
             </div>
-            <input id={'checkAgreement'} type="checkbox" />
+            <input id={'checkAgreement'} type="checkbox" ref={this.checkAgreementRef} />
           </label>
+          <span className={cl.field__error}>{this.state.checkAgreementError}</span>
           <input type="submit" value={'Create card'} />
         </form>
       </div>

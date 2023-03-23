@@ -16,7 +16,7 @@ class FormPage extends React.Component<Props, State> {
     super(props);
     this.state = {
       cards: [],
-      lastId: 0,
+      lastId: -1,
     };
   }
 

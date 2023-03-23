@@ -18,3 +18,11 @@ h1{
   margin: 50px auto;
   padding: 0 5vw;
 }
+
+.errorMessage{
+  color: #ff3535;
+}
+
+.successMessage{
+  color: #01e001;
+}
