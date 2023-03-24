@@ -41,8 +41,8 @@ class CardItem extends React.Component<Props> {
               <a href="#">
                 <span>{this.props.card.author?.firstname}</span>
                 <span> {this.props.card.author?.lastname}</span>
-                {this.props.card.role && <span> ({this.props.card.role})</span>}
               </a>
+              {this.props.card.role && <span> ({this.props.card.role})</span>}
             </p>
             {this.props.card.category && (
               <p>

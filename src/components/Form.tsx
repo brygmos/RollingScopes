@@ -120,6 +120,7 @@ class Form extends React.Component<Props, State> {
 
   validateSomeNameField(refPrefix: string) {
     if (refPrefix === 'checkAgreement') return;
+    if (refPrefix === 'date') return;
     const refName = refPrefix + 'Ref';
     const errorField = refPrefix + 'Error';
     const regex = new RegExp(/([A-Z]|[А-Я])([a-z]|[а-я]*)/g);
@@ -146,7 +147,7 @@ class Form extends React.Component<Props, State> {
       this.setFormStatus(false);
       this.setState({ dateError: "Date can't be in future" });
       return;
-    }
+    } else this.setState({ dateError: '' });
   }
   validateCheckAgreement() {
     if (this.checkAgreementRef?.current?.checked == false) {
@@ -242,6 +243,13 @@ class Form extends React.Component<Props, State> {
                 <input type="radio" id="student" name="role" value="student" />
                 <label htmlFor="student">Student</label>
               </div>
+            </div>
+          </div>
+
+          <div className={cl.input__container}>
+            <input id="date" type="date" ref={this.dateRef} />
+            <div className={cl.input__message}>
+              <p className={cl.field__error}>{this.state.dateError}</p>
             </div>
           </div>
 
