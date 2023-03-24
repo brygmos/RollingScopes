@@ -166,6 +166,7 @@ class Form extends React.Component<Props, State> {
     const fieldName = e.target.id;
     this.validateSomeNameField(fieldName);
     this.validateDate();
+    this.validateCheckAgreement();
   }
 
   setModal(visible: boolean, text: string, type: string) {
