@@ -65,6 +65,10 @@ class Form extends React.Component<Props, State> {
     this.setState({ fileUrl: URL.createObjectURL(event.target.files[0]) });
     this.setState({ fileName: event.target.files[0].name });
   };
+  removeFile = () => {
+    this.setState({ fileUrl: '' });
+    this.setState({ fileName: '' });
+  };
 
   setFormObject() {
     const card: CardType = {
@@ -113,6 +117,7 @@ class Form extends React.Component<Props, State> {
         this.setFormStatus(true);
         this.setFormObject();
         this.formRef.current?.reset();
+        this.removeFile();
         this.setModal(true, 'Card was successfully added', 'success');
       }
     });
