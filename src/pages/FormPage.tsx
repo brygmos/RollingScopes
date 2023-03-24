@@ -1,6 +1,5 @@
 import React from 'react';
-// import cl from './styles/FormPage.module.css';
-import Form from './Form';
+import Form from '../components/Form';
 import CardsList from '../components/CardsList';
 import { CardType } from '../components/CardItem';
 
@@ -21,7 +20,6 @@ class FormPage extends React.Component<Props, State> {
   }
 
   formHandler = (card: CardType) => {
-    // this.state.cards = [...this.state.cards, card];
     this.setState({ cards: [...this.state.cards, card] });
     this.setState({ lastId: this.state.cards.length });
   };

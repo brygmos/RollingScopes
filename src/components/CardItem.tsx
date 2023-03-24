@@ -22,19 +22,11 @@ type author = {
   lastname: string;
 };
 
-type State = {
-  card: CardType;
-};
-
 type Props = {
   card: CardType;
 };
 
-class CardItem extends React.Component<Props, State> {
-  state: State = {
-    card: this.props.card,
-  };
-
+class CardItem extends React.Component<Props> {
   render(): JSX.Element {
     return (
       <div className={cl.card}>

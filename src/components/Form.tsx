@@ -1,9 +1,9 @@
 import React from 'react';
-import cl from './styles/Form.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { CardType } from '../components/CardItem';
-import MyModal from '../components/MyModal';
+import { CardType } from './CardItem';
+import MyModal from './MyModal';
+import cl from './styles/Form.module.css';
 
 type State = {
   formIsValid: boolean;
@@ -15,10 +15,10 @@ type State = {
   surnameVisited: boolean;
   fileUrl: string;
   fileName: string;
-  [key: string]: string | boolean;
   modalVisibility: boolean;
   modalText: string;
   modalTextType: string;
+  [key: string]: string | boolean;
 };
 
 type Props = {
@@ -104,6 +104,7 @@ class Form extends React.Component<Props, State> {
       this.validateDate();
       this.validateCheckAgreement();
       resolve(null);
+      reject(null);
     });
 
     validate.then(() => {
@@ -113,16 +114,17 @@ class Form extends React.Component<Props, State> {
       } else {
         this.setFormStatus(true);
         this.setFormObject();
-        // this.formRef.current?.reset();
-        this.setModal(true, 'Card was succesfully added', 'success');
+        this.formRef.current?.reset();
+        this.setModal(true, 'Card was successfully added', 'success');
       }
     });
   }
 
-  validateSomeNameField(refPrefix = 'name') {
+  validateSomeNameField(refPrefix: string) {
+    if (refPrefix === 'checkAgreement') return;
     const refName = refPrefix + 'Ref';
     const errorField = refPrefix + 'Error';
-    const regex = new RegExp(/[A-Z]|[А-я][a-z]|[а-я]*/g);
+    const regex = new RegExp(/([A-Z]|[А-Я])([a-z]|[а-я]*)/g);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const value = this[refName as keyof React.LegacyRef<HTMLInputElement>]?.current?.value || '';
@@ -153,7 +155,7 @@ class Form extends React.Component<Props, State> {
       this.setFormStatus(false);
       this.setState({ checkAgreementError: 'You need to agree' });
       return;
-    }
+    } else this.setState({ checkAgreementError: '' });
   }
 
   handleBlur(e: React.BaseSyntheticEvent) {
@@ -167,7 +169,6 @@ class Form extends React.Component<Props, State> {
     this.setModalText(text);
     this.setModalTextType(type);
   }
-
   setModalVisibility(bool: boolean) {
     this.setState({ modalVisibility: bool });
   }

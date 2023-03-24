@@ -25,7 +25,6 @@
     overflow: hidden;
 }
 
-/*.form__field input[type="text"], input[type="email"], input[type="date"], input[type="submit"], label[for="file-upload"], select, .customFileInput__container{*/
 .form__field input[type="text"], input[type="date"], input[type="submit"], select{
     margin: 0 0 5px 0;
     background-color: #fff;
