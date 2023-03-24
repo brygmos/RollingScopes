@@ -75,7 +75,6 @@ class Form extends React.Component<Props, State> {
         firstname: this.nameRef.current?.value || '',
         lastname: this.surnameRef.current?.value || '',
       },
-      email: this.nameRef.current?.value || '',
       role: this.radioRef.current?.checked ? this.radioRef.current?.value : 'student',
       category: this.categoryRef.current?.value ? this.categoryRef.current.value : 'select',
       image: this.state.fileUrl || '',
@@ -106,7 +105,6 @@ class Form extends React.Component<Props, State> {
       resolve(null);
       reject(null);
     });
-
     validate.then(() => {
       if (!this.getFormStatus()) {
         this.setFormStatus(false);
@@ -206,14 +204,18 @@ class Form extends React.Component<Props, State> {
           <div className={cl.input__container}>
             <input id="name" type="text" ref={this.nameRef} placeholder={'Your name'} />
             <div className={cl.input__message}>
-              <span className={cl.field__error}>{this.state.nameError}</span>
+              <span data-testid={'nameError'} className={cl.field__error}>
+                {this.state.nameError}
+              </span>
             </div>
           </div>
 
           <div className={cl.input__container}>
             <input id="surname" type="text" ref={this.surnameRef} placeholder={'Your surname'} />
             <div className={cl.input__message}>
-              <p className={cl.field__error}>{this.state.surnameError}</p>
+              <p data-testid={'titleError'} className={cl.field__error}>
+                {this.state.surnameError}
+              </p>
             </div>
           </div>
 
@@ -285,7 +287,12 @@ class Form extends React.Component<Props, State> {
               <div>
                 <span>Agree to data processing: </span>
               </div>
-              <input id={'checkAgreement'} type="checkbox" ref={this.checkAgreementRef} />
+              <input
+                data-testid={'check'}
+                id={'checkAgreement'}
+                type="checkbox"
+                ref={this.checkAgreementRef}
+              />
             </label>
             <div className={cl.input__message}>
               <span className={cl.field__error}>{this.state.checkAgreementError}</span>
