@@ -19,17 +19,3 @@ function CardsList(props: Props): JSX.Element {
 }
 
 export default CardsList;
-
-// class CardsList extends React.Component<Props> {
-//   render(): JSX.Element {
-//     return (
-//       <div className={cl.container}>
-//         <div className={cl.cardList}>
-//           {this.props.cards.map((card) => (
-//             <CardItem card={card} key={card.id} />
-//           ))}
-//         </div>
-//       </div>
-//     );
-//   }
-// }
