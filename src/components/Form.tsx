@@ -124,7 +124,10 @@ class Form extends React.Component<Props, State> {
   }
 
   validateSomeNameField(refPrefix: string) {
-    if (refPrefix === 'checkAgreement') return;
+    if (refPrefix === 'checkAgreement') {
+      this.validateCheckAgreement();
+      return;
+    }
     if (refPrefix === 'date') return;
     const refName = refPrefix + 'Ref';
     const errorField = refPrefix + 'Error';
@@ -166,7 +169,6 @@ class Form extends React.Component<Props, State> {
     const fieldName = e.target.id;
     this.validateSomeNameField(fieldName);
     this.validateDate();
-    this.validateCheckAgreement();
   }
 
   setModal(visible: boolean, text: string, type: string) {
