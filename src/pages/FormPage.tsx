@@ -2,7 +2,6 @@ import React, { FC, useState } from 'react';
 import FormHooks from '../components/FormHooks';
 import CardsList from '../components/CardsList';
 import { CardType } from '../components/CardItem';
-// import { useForm } from 'react-hook-form';
 
 const FormPage: FC = () => {
   const [cards, setCards] = useState<CardType[]>([]);
