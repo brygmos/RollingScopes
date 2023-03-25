@@ -93,6 +93,6 @@ const cards: CardsType[] = [
   },
 ];
 
-export function getCardsByFakeAPI(): CardsType[] {
+export function getCardsByFakeAPI() {
   return cards;
 }
