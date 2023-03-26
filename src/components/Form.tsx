@@ -10,6 +10,9 @@ type State = {
   nameError: string;
   surnameError: string;
   titleError: string;
+  radioError: string;
+  selectError: string;
+  fileError: string;
   checkAgreementError: string;
   nameVisited: boolean;
   surnameVisited: boolean;
@@ -31,6 +34,7 @@ class Form extends React.Component<Props, State> {
   surnameRef: React.RefObject<HTMLInputElement>;
   dateRef: React.RefObject<HTMLInputElement>;
   radioRef: React.RefObject<HTMLInputElement>;
+  radioRef2: React.RefObject<HTMLInputElement>;
   titleRef: React.RefObject<HTMLInputElement>;
   categoryRef: React.RefObject<HTMLSelectElement>;
   checkAgreementRef: React.RefObject<HTMLInputElement>;
@@ -43,6 +47,9 @@ class Form extends React.Component<Props, State> {
       nameError: '',
       surnameError: '',
       titleError: '',
+      radioError: '',
+      selectError: '',
+      fileError: '',
       checkAgreementError: '',
       surnameVisited: false,
       fileUrl: '',
@@ -55,6 +62,7 @@ class Form extends React.Component<Props, State> {
     this.surnameRef = React.createRef();
     this.dateRef = React.createRef();
     this.radioRef = React.createRef();
+    this.radioRef2 = React.createRef();
     this.titleRef = React.createRef();
     this.categoryRef = React.createRef();
     this.checkAgreementRef = React.createRef();
@@ -99,16 +107,27 @@ class Form extends React.Component<Props, State> {
   }
 
   validateForm(): void {
+    const fields = [
+      'name',
+      'surname',
+      'title',
+      'radio',
+      'date',
+      'select',
+      'file',
+      'checkAgreement',
+    ];
     const validate = new Promise((resolve, reject) => {
       this.setFormStatus(true);
-      this.validateSomeNameField('title');
-      this.validateSomeNameField('name');
-      this.validateSomeNameField('surname');
-      this.validateDate();
-      this.validateCheckAgreement();
+
+      fields.map((field) => {
+        this.validateSomeNameField(field);
+      });
+
       resolve(null);
       reject(null);
     });
+
     validate.then(() => {
       if (!this.getFormStatus()) {
         this.setFormStatus(false);
@@ -124,11 +143,30 @@ class Form extends React.Component<Props, State> {
   }
 
   validateSomeNameField(refPrefix: string) {
-    if (refPrefix === 'checkAgreement') {
-      this.validateCheckAgreement();
-      return;
+    switch (refPrefix) {
+      case 'name':
+      case 'surname':
+      case 'title':
+        this.validateText(refPrefix);
+        break;
+      case 'radio':
+        this.validateRadio();
+        break;
+      case 'date':
+        this.validateDate();
+        break;
+      case 'select':
+        this.validateSelect();
+        break;
+      case 'file':
+        this.validateFile();
+        break;
+      case 'checkAgreement':
+        this.validateCheckAgreement();
+        break;
     }
-    if (refPrefix === 'date') return;
+  }
+  validateText(refPrefix: string) {
     const refName = refPrefix + 'Ref';
     const errorField = refPrefix + 'Error';
     const regex = new RegExp(/([A-Z]|[А-Я])([a-z]|[а-я]*)/g);
@@ -147,10 +185,14 @@ class Form extends React.Component<Props, State> {
       this.setState({ [`${errorField}`]: '' });
     }
   }
-
   validateDate() {
     const today = new Date().getTime();
     const userDate = new Date(this.dateRef.current?.value as string).getTime();
+    if (Number.isNaN(userDate)) {
+      this.setFormStatus(false);
+      this.setState({ dateError: 'Date must be chosen' });
+      return;
+    }
     if (today < userDate) {
       this.setFormStatus(false);
       this.setState({ dateError: "Date can't be in future" });
@@ -164,11 +206,31 @@ class Form extends React.Component<Props, State> {
       return;
     } else this.setState({ checkAgreementError: '' });
   }
+  validateRadio() {
+    if (this.radioRef?.current?.checked == false && this.radioRef2?.current?.checked == false) {
+      this.setFormStatus(false);
+      this.setState({ radioError: 'must be chosen' });
+      return;
+    } else this.setState({ radioError: '' });
+  }
+  validateSelect() {
+    if (this.categoryRef.current?.value == 'label') {
+      this.setFormStatus(false);
+      this.setState({ selectError: 'must be chosen' });
+      return;
+    } else this.setState({ selectError: '' });
+  }
+  validateFile() {
+    if (this.state.fileName == '') {
+      this.setFormStatus(false);
+      this.setState({ fileError: 'please select cover' });
+      return;
+    } else this.setState({ fileError: '' });
+  }
 
   handleBlur(e: React.BaseSyntheticEvent) {
     const fieldName = e.target.id;
     this.validateSomeNameField(fieldName);
-    this.validateDate();
   }
 
   setModal(visible: boolean, text: string, type: string) {
@@ -239,18 +301,14 @@ class Form extends React.Component<Props, State> {
             <div className={cl.type_radio}>
               <label>select your role:</label>
               <div>
-                <input
-                  ref={this.radioRef}
-                  type="radio"
-                  id="tutor"
-                  name="role"
-                  value="tutor"
-                  defaultChecked={true}
-                />
+                <input ref={this.radioRef} type="radio" id="tutor" name="role" value="tutor" />
                 <label htmlFor="tutor">Tutor</label>
-                <input type="radio" id="student" name="role" value="student" />
+                <input ref={this.radioRef2} type="radio" id="student" name="role" value="student" />
                 <label htmlFor="student">Student</label>
               </div>
+            </div>
+            <div className={cl.input__message}>
+              <p className={cl.field__error}>{this.state.radioError}</p>
             </div>
           </div>
 
@@ -269,14 +327,17 @@ class Form extends React.Component<Props, State> {
               <label htmlFor="cars">Category: </label>
             </div>
             <select id="select" name="category" ref={this.categoryRef}>
-              <option value="volvo" defaultChecked={true}>
-                Volvo
+              <option value="label" defaultChecked={true}>
+                Choose category...
               </option>
+              <option value="volvo">Volvo</option>
               <option value="saab">Saab</option>
               <option value="fiat">Fiat</option>
               <option value="audi">Audi</option>
             </select>
-            <div className={cl.input__message}></div>
+            <div className={cl.input__message}>
+              <p className={cl.field__error}>{this.state.selectError}</p>
+            </div>
           </div>
 
           <div className={cl.input__container}>
@@ -298,6 +359,7 @@ class Form extends React.Component<Props, State> {
 
             <div className={cl.input__message}>
               <span className={cl.fileName}>{this.state.fileName}</span>
+              <p className={cl.field__error}>{this.state.fileError}</p>
             </div>
           </div>
 
