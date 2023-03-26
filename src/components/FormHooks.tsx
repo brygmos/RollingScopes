@@ -52,7 +52,7 @@ function Form(props: Props): JSX.Element {
         firstname: data.name,
         lastname: data.surname,
       },
-      role: data.role,
+      role: data.role
       category: data.select,
       image: url,
     };
