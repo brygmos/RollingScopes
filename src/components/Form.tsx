@@ -229,7 +229,8 @@ class Form extends React.Component<Props, State> {
   }
 
   handleBlur(e: React.BaseSyntheticEvent) {
-    const fieldName = e.target.id;
+    let fieldName = e.target.id;
+    fieldName == 'tutor' || fieldName == 'student' ? (fieldName = 'radio') : null;
     this.validateSomeNameField(fieldName);
   }
 
