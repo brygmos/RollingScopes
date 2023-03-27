@@ -7,6 +7,7 @@ import Form from './Form';
 
 describe('Form', () => {
   it('render fields', () => {
+    URL.createObjectURL = vi.fn().mockReturnValue('TODOmyMockUrl');
     render(<Form formHandler={() => {}} lastId={0} />);
 
     expect(screen.getByPlaceholderText(/your name/i)).toHaveTextContent('');
@@ -14,19 +15,21 @@ describe('Form', () => {
     expect(screen.getByPlaceholderText(/title/i)).toHaveTextContent('');
     expect(screen.getByText(/category/i)).toBeTruthy();
   });
-  // it('show input data', () => {
-  //   render(<Form formHandler={() => {}} lastId={0} />);
-  //
-  //   const name = screen.getByPlaceholderText(/your name/i);
-  //
-  //   act(() => {
-  //     fireEvent.change(name, { target: { value: 'abc' } });
-  //     fireEvent.click(screen.getByPlaceholderText(/surname/i));
-  //   });
-  //
-  //   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Form');
-  //   expect(name).toHaveValue('abc');
-  // });
+  it('show input data', () => {
+    render(<Form formHandler={() => {}} lastId={0} />);
+
+    const name = screen.getByPlaceholderText(/your name/i);
+
+    act(() => {
+      fireEvent.change(name, { target: { value: 'abc' } });
+      fireEvent.click(screen.getByPlaceholderText(/surname/i));
+    });
+
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Form');
+    expect(name).toHaveValue('abc');
+  });
+  //TODO
+
   // it('show hints', () => {
   //   render(<Form formHandler={() => {}} lastId={0} />);
   //

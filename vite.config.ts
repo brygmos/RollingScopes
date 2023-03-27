@@ -12,11 +12,11 @@ export default defineConfig({
     setupFiles: './src/test/setup.ts',
     // you might want to disable it, if you don't have tests that rely on CSS
     // since parsing CSS is slow
-    css: true,
+    css: false,
     coverage: {
       provider: 'c8',
       all: true,
-      // skipFull: true,
+      skipFull: false,
       reporter: 'text',
     },
   },

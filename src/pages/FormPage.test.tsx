@@ -8,6 +8,8 @@ import FormPage from './FormPage';
 
 describe('FormPage', () => {
   it('renders form', () => {
+    URL.createObjectURL = vi.fn().mockReturnValue('TODOmyMockUrl');
+
     render(
       <MemoryRouter initialEntries={['/form']}>
         <App />
