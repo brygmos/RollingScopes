@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
-import FormHooks from '../components/FormHooks';
 import CardsList from '../components/CardsList';
 import { CardType } from '../components/CardItem';
+import Form from '../components/Form';
 
 const FormPage: FC = () => {
   const [cards, setCards] = useState<CardType[]>([]);
@@ -14,7 +14,7 @@ const FormPage: FC = () => {
 
   return (
     <>
-      <FormHooks formHandler={formHandler} lastId={lastId} />
+      <Form formHandler={formHandler} lastId={lastId} />
       <CardsList cards={cards} />
     </>
   );
