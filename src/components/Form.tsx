@@ -228,12 +228,6 @@ class Form extends React.Component<Props, State> {
     } else this.setState({ fileError: '' });
   }
 
-  handleBlur(e: React.BaseSyntheticEvent) {
-    let fieldName = e.target.id;
-    fieldName == 'tutor' || fieldName == 'student' ? (fieldName = 'radio') : null;
-    this.validateSomeNameField(fieldName);
-  }
-
   setModal(visible: boolean, text: string, type: string) {
     this.setModalVisibility(visible);
     this.setModalText(text);
@@ -267,9 +261,6 @@ class Form extends React.Component<Props, State> {
           ref={this.formRef}
           onSubmit={(event) => {
             this.submitForm(event);
-          }}
-          onBlur={(event) => {
-            this.handleBlur(event);
           }}
         >
           <h1>Form</h1>
