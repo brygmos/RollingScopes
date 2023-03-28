@@ -219,7 +219,6 @@ function Form(props: Props): JSX.Element {
             </label>
           </div>
           <div className={cl.input__message}>
-            {/*{errors.file && <span className={cl.field__error}>{errors.file.message}</span>}*/}
             {!watch('file') || watch('file').length === 0 ? (
               <span className={cl.field__error}>{errors.file && errors.file.message}</span>
             ) : (

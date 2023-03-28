@@ -7,7 +7,7 @@ import Form from './Form';
 
 describe('Form', () => {
   it('render fields', () => {
-    URL.createObjectURL = vi.fn().mockReturnValue('TODOmyMockUrl');
+    URL.createObjectURL = vi.fn().mockReturnValue('myMockUrl');
     render(<Form formHandler={() => {}} lastId={0} />);
 
     expect(screen.getByPlaceholderText(/your name/i)).toHaveTextContent('');
