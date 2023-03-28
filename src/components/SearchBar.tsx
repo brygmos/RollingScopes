@@ -8,7 +8,6 @@ const SearchBar: FC = () => {
   useEffect(() => {
     searchValue.current = finder;
   }, [finder]);
-
   useEffect(() => {
     return () => {
       localStorage.setItem('finder', searchValue.current);

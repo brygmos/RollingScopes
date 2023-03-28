@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
 import { describe, expect, it } from 'vitest';
@@ -28,30 +28,26 @@ describe('Form', () => {
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Form');
     expect(name).toHaveValue('abc');
   });
-  //TODO
 
-  // it('show hints', () => {
-  //   render(<Form formHandler={() => {}} lastId={0} />);
-  //
-  //   const name = screen.getByPlaceholderText(/your name/i);
-  //
-  //   fireEvent.change(name, { target: { value: 'a' } });
-  //   fireEvent.click(screen.getByText(/Create/i));
-  //
-  //   expect(screen.getByText(/this field is required/i)).toBeInTheDOM();
-  // });
-  // it('show correct hints', () => {
-  //   render(<Form formHandler={() => {}} lastId={0} />);
-  //
-  //   const name = screen.getByPlaceholderText(/title/i);
-  //
-  //   act(() => {
-  //     fireEvent.change(name, { target: { value: 'a' } });
-  //     fireEvent.click(screen.getByText(/Create/i));
-  //   });
-  //
-  //   const hint = screen.getByTestId('titleError');
-  //
-  //   expect(hint).toHaveTextContent('Field is required');
-  // });
+  it('displays modal error message', async () => {
+    render(<Form formHandler={() => {}} lastId={0} />);
+
+    const usernameInput = screen.getByPlaceholderText(/your name/i);
+    fireEvent.change(usernameInput, { target: { value: 'a' } });
+
+    fireEvent.click(screen.getByText(/Create/i));
+
+    await waitFor(() => screen.getByText(/invalid data/i));
+  });
+
+  it('displays error message when name is empty', async () => {
+    const { getByText, getByPlaceholderText } = render(<Form formHandler={() => {}} lastId={0} />);
+    const usernameInput = getByPlaceholderText(/your name/i);
+    fireEvent.change(usernameInput, { target: { value: '' } });
+
+    const submitButton = getByText('Create card');
+    fireEvent.click(submitButton);
+
+    await waitFor(() => getByText('name is required'));
+  });
 });

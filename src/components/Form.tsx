@@ -109,14 +109,13 @@ function Form(props: Props): JSX.Element {
             type="text"
             id="name"
             placeholder={'your name'}
-            {...register('name', { required: true, minLength: 2 })}
+            {...register('name', {
+              required: { value: true, message: 'name is required' },
+              minLength: 2,
+            })}
           />
           <div className={cl.input__message}>
-            {errors.name && (
-              <span className={cl.field__error} data-testid={'nameError'}>
-                This field is required
-              </span>
-            )}
+            {errors.name && <span className={cl.field__error}>{errors.name.message}</span>}
           </div>
         </div>
 
