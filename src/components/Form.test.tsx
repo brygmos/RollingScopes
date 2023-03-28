@@ -35,13 +35,10 @@ describe('Form', () => {
   //
   //   const name = screen.getByPlaceholderText(/your name/i);
   //
-  //   act(() => {
-  //     fireEvent.change(name, { target: { value: 'abc' } });
-  //     fireEvent.click(screen.getByText(/Create/i));
-  //   });
-  //   const hint = screen.getByTestId('nameError');
+  //   fireEvent.change(name, { target: { value: 'a' } });
+  //   fireEvent.click(screen.getByText(/Create/i));
   //
-  //   expect(hint).toHaveTextContent('First letter should be capital');
+  //   expect(screen.getByText(/this field is required/i)).toBeInTheDOM();
   // });
   // it('show correct hints', () => {
   //   render(<Form formHandler={() => {}} lastId={0} />);

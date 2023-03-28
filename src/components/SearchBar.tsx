@@ -1,13 +1,19 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import cl from './styles/SeachBar.module.css';
 
 const SearchBar: FC = () => {
   const [finder, setFinder] = useState(localStorage.getItem('finder') || '');
+  const searchValue = useRef('');
 
   useEffect(() => {
-    const input: string = finder || '';
-    localStorage.setItem('finder', input);
+    searchValue.current = finder;
   }, [finder]);
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('finder', searchValue.current);
+    };
+  }, []);
 
   return (
     <div className={cl.container}>
