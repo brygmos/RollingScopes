@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "lint": "eslint src",
+    "fix": "eslint --fix src",
+    "test": "vitest --coverage",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --fix src",
     "prettier": "prettier --write .",
-    "test": "vitest --coverage",
     "test:ui": "vitest --ui"
   },
   "dependencies": {

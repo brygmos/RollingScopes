@@ -12,12 +12,10 @@ type CardsType = {
   date?: string;
   category?: string;
 };
-
 type author = {
   firstname: string;
   lastname: string;
 };
-
 const cards: CardsType[] = [
   {
     id: 0,

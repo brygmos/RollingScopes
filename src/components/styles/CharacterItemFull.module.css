@@ -1,0 +1,78 @@
+.card{
+    background-color: #fff;
+    border-radius: 20px;
+    color: #161616;
+    text-align: center;
+    height: auto;
+    max-height: 90vh;
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow: scroll;
+    justify-content: center;
+    align-items: center;
+}
+
+.card p{
+    margin: 0.1vh;
+}
+
+.img{
+    width: auto;
+    height: auto;
+    min-height: 50px;
+}
+
+.textContent{
+    /*height: available;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    flex: 1;
+}
+
+.header{
+    background-color: aqua;
+    padding: 1vw;
+}
+.header a{
+    margin-left: 10px;
+    color: black;
+}
+.header a:hover{
+    text-decoration: none;
+}
+
+.views{
+    margin: 10px;
+}
+.views span{
+    margin-left: 10px;
+}
+.btns{
+    font-size: 20px;
+    padding: 1vh 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.like{
+    float: left;
+}
+.like svg:hover{
+    color: aqua;
+    cursor: pointer;
+}
+.like span{
+    margin-left: 10px;
+}
+.bookmark{
+    float: left;
+}
+.bookmark:hover{
+    color: aqua;
+    cursor: pointer;
+
+}

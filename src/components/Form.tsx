@@ -17,7 +17,7 @@ type Inputs = {
   file: FileList;
 };
 
-enum ImodalTextType {
+export enum ImodalTextType {
   neutral = 'neutral',
   success = 'success',
   warning = 'warning',

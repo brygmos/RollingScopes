@@ -1,5 +1,6 @@
 .navbar{
     margin: 1vh 5vh;
+    /*background-color: #16ACC9;*/
     background-color: aqua;
     flex: 1;
     height: 50px;
