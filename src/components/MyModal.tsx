@@ -17,14 +17,13 @@ const MyModal: FC<Props> = ({
   messageType = 'neutral',
 }) => {
   return (
-    <div>
+    <div
+      onClick={() => {
+        setModalVisibility();
+      }}
+    >
       {visible && (
-        <div
-          className={cl.background}
-          onClick={() => {
-            setModalVisibility();
-          }}
-        >
+        <div className={cl.background}>
           <div className={cl.container}>
             <h1 className={cl[messageType]}>{modalText}</h1>
             {children}

@@ -29,30 +29,38 @@ export type CharacterType = {
 function CharacterItemFull(props: Props): JSX.Element {
   return (
     <div className={cl.card}>
+      <div className={cl.close}>
+        <div></div>
+        <div></div>
+      </div>
       {props.card.image && <img className={cl.img} src={props.card.image} alt="card image" />}
       <div className={cl.textContent}>
         <div className={cl.header}>
           <h1>{props.card.name}</h1>
-          {props.card.type && (
-            <p>
-              <strong>Type: </strong>
-              {props.card.type}
-            </p>
-          )}
+        </div>
+        {props.card.type && (
           <p>
-            <strong>Status: </strong>
-            {props.card.status}
+            <strong>Type: </strong>
+            {props.card.type}
           </p>
-          <p>
-            <strong>Created: </strong>
-            {props.card.created}
-          </p>
+        )}
+        <p>
+          <strong>Status: </strong>
+          {props.card.status}
+        </p>
+        <p>
+          <strong>Created: </strong>
+          {props.card.created}
+        </p>
+        <div className={cl.episodes}>
           <p>
             <strong>Episodes:</strong>
           </p>
           {props.card.episode?.map((episode) => (
             <p key={episode}>
-              <i>{episode}</i>
+              <a href={episode} target={'_blank'} rel="noreferrer">
+                <i>{episode}</i>
+              </a>
             </p>
           ))}
         </div>

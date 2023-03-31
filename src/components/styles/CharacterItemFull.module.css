@@ -1,78 +1,91 @@
 .card{
-    background-color: #fff;
     border-radius: 20px;
     color: #161616;
     text-align: center;
     height: auto;
     max-height: 90vh;
+    max-width: 90vw;
     width: auto;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    overflow: scroll;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.close{
+    width: 30px;
+    height: 30px;
+    color: #01e001;
+    background-color: #3a3a3a;
+    opacity: 0.5;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-2.5px) rotate(45deg);
+    cursor: pointer;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+.close div{
+    width: 6px;
+    height: 25px;
+    background-color: white;
+    rotation-point: center;
+    border-radius: 10px;
+
+}
+
+.close div:first-child{
+    transform: translateX(3px);
+}
+
+.close div:last-child{
+    transform: translateX(-3px) rotate(90deg);
+}
+
+.episodes{
+    max-height: 100px;
+    overflow-y: scroll;
+    border: 1px solid white;
+}
+
+.card a{
+    color: white;
 }
 
 .card p{
-    margin: 0.1vh;
+    margin: 10px;
 }
 
 .img{
+    border-radius: 20px;
     width: auto;
     height: auto;
     min-height: 50px;
 }
 
 .textContent{
-    /*height: available;*/
+    height: available;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
     flex: 1;
+    color: white;
+    margin: 30px;
 }
 
 .header{
     background-color: aqua;
-    padding: 1vw;
-}
-.header a{
-    margin-left: 10px;
-    color: black;
-}
-.header a:hover{
-    text-decoration: none;
-}
-
-.views{
-    margin: 10px;
-}
-.views span{
-    margin-left: 10px;
-}
-.btns{
-    font-size: 20px;
-    padding: 1vh 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.like{
-    float: left;
-}
-.like svg:hover{
-    color: aqua;
-    cursor: pointer;
-}
-.like span{
-    margin-left: 10px;
-}
-.bookmark{
-    float: left;
-}
-.bookmark:hover{
-    color: aqua;
-    cursor: pointer;
-
+    padding: 10px;
+    border-radius: 20px;
 }
