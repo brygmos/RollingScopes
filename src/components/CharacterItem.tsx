@@ -39,7 +39,6 @@ function CharacterItem(props: Props): JSX.Element {
       <div className={cl.textContent}>
         <div className={cl.header}>
           <h1>{props.card.name}</h1>
-          <p>{props.card.species}</p>
         </div>
       </div>
     </div>

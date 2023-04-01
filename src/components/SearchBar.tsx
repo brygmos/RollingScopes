@@ -1,7 +1,11 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import cl from './styles/SeachBar.module.css';
 
-const SearchBar: FC = () => {
+type Props = {
+  findQuery: (query: string) => Promise<void>;
+};
+
+const SearchBar = (props: Props) => {
   const [finder, setFinder] = useState(localStorage.getItem('finder') || '');
   const searchValue = useRef('');
 
@@ -13,6 +17,18 @@ const SearchBar: FC = () => {
       localStorage.setItem('finder', searchValue.current);
     };
   }, []);
+
+  const keyHandler = (e: React.KeyboardEvent) => {
+    if (e.key == 'Enter') {
+      find(searchValue.current);
+    }
+  };
+
+  const find = (query: string) => {
+    console.log('find');
+    localStorage.setItem('finder', searchValue.current);
+    props.findQuery(query);
+  };
 
   return (
     <div className={cl.container}>
@@ -26,6 +42,9 @@ const SearchBar: FC = () => {
         placeholder={'Search...'}
         type="text"
         onChange={(e) => setFinder(e.currentTarget.value)}
+        onKeyDown={(event) => {
+          keyHandler(event);
+        }}
       />
     </div>
   );

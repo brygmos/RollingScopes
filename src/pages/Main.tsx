@@ -18,8 +18,20 @@ const Main: FC = (): JSX.Element => {
   }, []);
 
   const foo = async () => {
-    const url = `https://rickandmortyapi.com/api/character/?page=$1`;
+    const url = `https://rickandmortyapi.com/api/character`;
     const response = await fetch(url);
+    const data = await response.json();
+    setCards(data.results);
+  };
+
+  const findQuery = async (query: string) => {
+    const url = `https://rickandmortyapi.com/api/character?`;
+    const response = await fetch(
+      url +
+        new URLSearchParams({
+          name: query,
+        })
+    );
     const data = await response.json();
     setCards(data.results);
   };
@@ -50,7 +62,7 @@ const Main: FC = (): JSX.Element => {
           <CharacterItemFull card={activeCard} />
         </MyModal>
       )}
-      <SearchBar />
+      <SearchBar findQuery={findQuery} />
       <CharacterList cards={cards} showFullCard={showFullCard} />
     </>
   );

@@ -38,6 +38,12 @@ function CharacterItemFull(props: Props): JSX.Element {
         <div className={cl.header}>
           <h1>{props.card.name}</h1>
         </div>
+        {props.card.species && (
+          <p>
+            <strong>Species: </strong>
+            {props.card.species}
+          </p>
+        )}
         {props.card.type && (
           <p>
             <strong>Type: </strong>
