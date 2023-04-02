@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import cl from './styles/SeachBar.module.css';
 
 type Props = {
@@ -25,7 +25,6 @@ const SearchBar = (props: Props) => {
   };
 
   const find = (query: string) => {
-    console.log('find');
     localStorage.setItem('finder', searchValue.current);
     props.findQuery(query);
   };

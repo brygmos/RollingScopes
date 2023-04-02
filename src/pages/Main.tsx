@@ -10,6 +10,8 @@ const Main: FC = (): JSX.Element => {
   const [cards, setCards] = useState<CharacterType[]>([]);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalText, setModalText] = useState('');
+  const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(false);
   const [modalTextType, setModalTextType] = useState('neutral');
   const [activeCard, setActiveCard] = useState<CharacterType | object>({});
 
@@ -26,14 +28,34 @@ const Main: FC = (): JSX.Element => {
 
   const findQuery = async (query: string) => {
     const url = `https://rickandmortyapi.com/api/character?`;
-    const response = await fetch(
-      url +
-        new URLSearchParams({
-          name: query,
-        })
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        url +
+          new URLSearchParams({
+            name: query,
+          })
+      ).catch(handleError);
+      const data = await response.json();
+      setCards(data.results);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+      }
+      console.log(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleError = () => {
+    console.log(error);
+    return new Response(
+      JSON.stringify({
+        code: 400,
+        message: 'network Error',
+      })
     );
-    const data = await response.json();
-    setCards(data.results);
   };
 
   function setModal(visible: boolean, text = '', type: ImodalTextType) {
@@ -50,7 +72,7 @@ const Main: FC = (): JSX.Element => {
 
   return (
     <>
-      {cards[0] && modalVisibility && (
+      {modalVisibility && (
         <MyModal
           visible={modalVisibility}
           modalText={modalText}
@@ -63,7 +85,13 @@ const Main: FC = (): JSX.Element => {
         </MyModal>
       )}
       <SearchBar findQuery={findQuery} />
-      <CharacterList cards={cards} showFullCard={showFullCard} />
+      {isLoading && <h1>Loading...</h1>}
+      <h1>{error}</h1>
+      {!cards ? (
+        <h1>Cards not found</h1>
+      ) : (
+        <CharacterList cards={cards} showFullCard={showFullCard} />
+      )}
     </>
   );
 };
