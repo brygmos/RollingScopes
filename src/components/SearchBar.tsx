@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import cl from './styles/SeachBar.module.css';
 
 type Props = {
-  findQuery: (query: string) => Promise<void>;
+  findQuery?: (query: string) => Promise<void>;
 };
 
 const SearchBar = (props: Props) => {
@@ -26,7 +26,7 @@ const SearchBar = (props: Props) => {
 
   const find = (query: string) => {
     localStorage.setItem('finder', searchValue.current);
-    props.findQuery(query);
+    props.findQuery ? props.findQuery(query) : null;
   };
 
   return (

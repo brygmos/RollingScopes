@@ -7,10 +7,7 @@ import SearchBar from './SearchBar';
 
 describe('SearchBar', () => {
   it('has a correct initial value', () => {
-    //ARRANGE
     render(<SearchBar />);
-    //ACT
-    //expect
     expect(screen.getByPlaceholderText(/search.../i)).toHaveTextContent('');
   });
   it('correctly gets input text', () => {

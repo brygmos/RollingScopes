@@ -47,17 +47,17 @@ function Form(props: Props): JSX.Element {
     },
   });
 
-  function setFormObject(data: CardType, url: string) {
+  function setFormObject(data: Inputs, url: string) {
     const card: CardType = {
       id: props.lastId + 1,
       title: data.title,
       date: data.date,
       author: {
-        firstname: data.author?.firstname || '',
-        lastname: data.author?.lastname || '',
+        firstname: data.name || 'name',
+        lastname: data.surname || 'surname',
       },
       role: data.role,
-      category: data.selector,
+      category: data.select,
       image: url,
     };
     props.formHandler(card);
@@ -187,11 +187,7 @@ function Form(props: Props): JSX.Element {
         </div>
 
         <div className={cl.input__container}>
-          <select
-            // name="select"
-            id="select"
-            {...register('select', { required: 'Select some..' })}
-          >
+          <select id="select" {...register('select', { required: 'Select some..' })}>
             <option value="" defaultChecked={true}>
               Choose category:
             </option>
