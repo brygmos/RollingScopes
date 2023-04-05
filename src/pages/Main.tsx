@@ -5,6 +5,7 @@ import CharacterList from '../components/CharactersList';
 import MyModal from '../components/MyModal';
 import CharacterItemFull from '../components/CharacterItemFull';
 import { ImodalTextType } from '../components/Form';
+import Loader from '../components/UI/Loader/Loader';
 
 const Main: FC = (): JSX.Element => {
   const [cards, setCards] = useState<CharacterType[]>([]);
@@ -90,10 +91,12 @@ const Main: FC = (): JSX.Element => {
         </MyModal>
       )}
       <SearchBar findQuery={findQuery} />
-      {isLoading && <h1>Loading...</h1>}
+      {isLoading && <Loader />}
       <h1>{error}</h1>
       {!cards ? (
-        <h1>Cards not found</h1>
+        <div className={'container'}>
+          <h1>Cards not found</h1>
+        </div>
       ) : (
         <CharacterList cards={cards} showFullCard={showFullCard} />
       )}
