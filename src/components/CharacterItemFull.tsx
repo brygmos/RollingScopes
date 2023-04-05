@@ -1,8 +1,10 @@
 import React from 'react';
 import cl from './styles/CharacterItemFull.module.css';
+import CloseButton from './UI/CloseButton/CloseButton';
 
 type Props = {
   card: CharacterType;
+  closeModal?: () => void;
 };
 
 export type CharacterType = {
@@ -29,10 +31,7 @@ export type CharacterType = {
 function CharacterItemFull(props: Props): JSX.Element {
   return (
     <div className={cl.card}>
-      <div className={cl.close}>
-        <div></div>
-        <div></div>
-      </div>
+      <CloseButton onClick={props.closeModal} />
       {props.card.image && <img className={cl.img} src={props.card.image} alt="card image" />}
       <div className={cl.textContent}>
         <div className={cl.header}>

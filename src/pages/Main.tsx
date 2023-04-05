@@ -78,10 +78,15 @@ const Main: FC = (): JSX.Element => {
           modalText={modalText}
           messageType={modalTextType}
           setModalVisibility={() => {
-            setModalVisibility(false);
+            setModalVisibility(!modalVisibility);
           }}
         >
-          <CharacterItemFull card={activeCard} />
+          <CharacterItemFull
+            card={activeCard}
+            closeModal={() => {
+              setModalVisibility(!modalVisibility);
+            }}
+          />
         </MyModal>
       )}
       <SearchBar findQuery={findQuery} />

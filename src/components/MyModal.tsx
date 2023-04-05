@@ -24,7 +24,12 @@ const MyModal: FC<Props> = ({
     >
       {visible && (
         <div className={cl.background}>
-          <div className={cl.container}>
+          <div
+            className={cl.container}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
             <h1 className={cl[messageType]}>{modalText}</h1>
             {children}
           </div>
