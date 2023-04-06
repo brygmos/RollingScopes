@@ -17,14 +17,18 @@ const Main: FC = (): JSX.Element => {
   const [activeCard, setActiveCard] = useState<CharacterType | object>({});
 
   useEffect(() => {
-    foo();
+    initialQuery();
   }, []);
 
-  const foo = async () => {
+  const initialQuery = async () => {
     const url = `https://rickandmortyapi.com/api/character`;
     const response = await fetch(url);
+    // if (response.ok) {
     const data = await response.json();
-    setCards(data.results);
+    setCards(await data.results);
+    // } else {
+    //   console.log('HTTP error: ' + response.status);
+    // }
   };
 
   const findQuery = async (query: string) => {
@@ -64,7 +68,7 @@ const Main: FC = (): JSX.Element => {
     setModalText(text);
     setModalTextType(type);
   }
-
+  //TODO new request to api for full card
   const showFullCard = (id: number) => {
     const card = cards.filter((card) => card.id == id)[0];
     setModal(true, '', ImodalTextType.success);
