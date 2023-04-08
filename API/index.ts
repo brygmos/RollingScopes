@@ -12,4 +12,8 @@ export default class Api {
         })
     );
   }
+  static async getCharacterById(id: number) {
+    const url = `https://rickandmortyapi.com/api/character/${id}`;
+    return await fetch(url);
+  }
 }

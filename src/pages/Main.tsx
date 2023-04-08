@@ -14,6 +14,7 @@ const Main: FC = (): JSX.Element => {
   const [modalText, setModalText] = useState('');
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
+  const [cardIsLoading, setCardIsLoading] = useState(false);
   const [modalTextType, setModalTextType] = useState('neutral');
   const [activeCard, setActiveCard] = useState<CharacterType | object>({});
 
@@ -28,9 +29,9 @@ const Main: FC = (): JSX.Element => {
   };
 
   const findQuery = async (query: string) => {
+    setIsLoading(true);
     try {
       const response = await Api.getCharactersByQuery(query);
-      setIsLoading(true);
       const data = await response.json();
       setCards(data.results);
     } catch (e) {
@@ -48,11 +49,22 @@ const Main: FC = (): JSX.Element => {
     setModalText(text);
     setModalTextType(type);
   }
-  //TODO new request to api for full card
-  const showFullCard = (id: number) => {
-    const card = cards.filter((card) => card.id == id)[0];
+
+  const showFullCard = async (id: number) => {
     setModal(true, '', ImodalTextType.success);
-    setActiveCard(card);
+    setCardIsLoading(true);
+    try {
+      const response = await Api.getCharacterById(id);
+      const data = await response.json();
+      setActiveCard(data);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+      }
+      console.log(e);
+    } finally {
+      setCardIsLoading(false);
+    }
   };
 
   return (
@@ -66,12 +78,16 @@ const Main: FC = (): JSX.Element => {
             setModalVisibility(!modalVisibility);
           }}
         >
-          <CharacterItemFull
-            card={activeCard}
-            closeModal={() => {
-              setModalVisibility(!modalVisibility);
-            }}
-          />
+          {cardIsLoading ? (
+            <Loader />
+          ) : (
+            <CharacterItemFull
+              card={activeCard}
+              closeModal={() => {
+                setModalVisibility(!modalVisibility);
+              }}
+            />
+          )}
         </MyModal>
       )}
       <SearchBar findQuery={findQuery} />
