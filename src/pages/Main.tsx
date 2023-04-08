@@ -28,15 +28,9 @@ const Main: FC = (): JSX.Element => {
   };
 
   const findQuery = async (query: string) => {
-    const url = `https://rickandmortyapi.com/api/character?`;
     try {
+      const response = await Api.getCharactersByQuery(query);
       setIsLoading(true);
-      const response = await fetch(
-        url +
-          new URLSearchParams({
-            name: query,
-          })
-      ).catch(handleError);
       const data = await response.json();
       setCards(data.results);
     } catch (e) {
@@ -47,16 +41,6 @@ const Main: FC = (): JSX.Element => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleError = () => {
-    console.log(error);
-    return new Response(
-      JSON.stringify({
-        code: 400,
-        message: 'network Error',
-      })
-    );
   };
 
   function setModal(visible: boolean, text = '', type: ImodalTextType) {
