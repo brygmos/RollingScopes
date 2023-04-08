@@ -6,6 +6,7 @@ import MyModal from '../components/MyModal';
 import CharacterItemFull from '../components/CharacterItemFull';
 import { ImodalTextType } from '../components/Form';
 import Loader from '../components/UI/Loader/Loader';
+import Api from '../../API';
 
 const Main: FC = (): JSX.Element => {
   const [cards, setCards] = useState<CharacterType[]>([]);
@@ -21,14 +22,9 @@ const Main: FC = (): JSX.Element => {
   }, []);
 
   const initialQuery = async () => {
-    const url = `https://rickandmortyapi.com/api/character`;
-    const response = await fetch(url);
-    // if (response.ok) {
+    const response = await Api.getAllCharacters();
     const data = await response.json();
-    setCards(await data.results);
-    // } else {
-    //   console.log('HTTP error: ' + response.status);
-    // }
+    setCards(data.results);
   };
 
   const findQuery = async (query: string) => {
