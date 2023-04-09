@@ -16,17 +16,4 @@ export default class Api {
     const url = `https://rickandmortyapi.com/api/character/${id}`;
     return await fetch(url);
   }
-  // return await fetch(url);
-
-  // return async () => {
-  //   const authUserId = getState().auth.id
-  //   let data = await profileAPI.saveProfile(editDataAboutMe)
-  //   if (data.resultCode === 0) {
-  //     dispatch(setUserProfileThunkCreator(authUserId))
-  //     return Promise.resolve()
-  //   } else {
-  //     dispatch(stopSubmit('AboutMeEditForm', {_error: data.messages[0]}))
-  //     return Promise.reject()
-  //   }
-  // }
 }

@@ -19,7 +19,7 @@ const Main: FC = (): JSX.Element => {
   const [activeCard, setActiveCard] = useState<CharacterType | object>({});
 
   useEffect(() => {
-    initialQuery().then(console.log);
+    initialQuery().then(null);
   }, []);
 
   const initialQuery = async () => {
@@ -33,15 +33,13 @@ const Main: FC = (): JSX.Element => {
 
   const findQuery = async (query: string) => {
     setIsLoading(true);
-    const response = await Api.getCharactersByQuery(query);
-    const data = await response.json();
-    if (response.status === 200) {
+    try {
+      const response = await Api.getCharactersByQuery(query);
+      const data = await response.json();
       setCards(data.results);
       setIsLoading(false);
-      return Promise.resolve();
-    } else {
-      setError(error);
-      return Promise.reject();
+    } catch (e) {
+      console.log(e);
     }
   };
 
