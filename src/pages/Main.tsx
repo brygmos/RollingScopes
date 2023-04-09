@@ -19,28 +19,29 @@ const Main: FC = (): JSX.Element => {
   const [activeCard, setActiveCard] = useState<CharacterType | object>({});
 
   useEffect(() => {
-    initialQuery();
+    initialQuery().then(console.log);
   }, []);
 
   const initialQuery = async () => {
     const response = await Api.getAllCharacters();
     const data = await response.json();
-    setCards(data.results);
+    if (response.status === 200) {
+      setCards(data.results);
+      setCardIsLoading(false);
+    }
   };
 
   const findQuery = async (query: string) => {
     setIsLoading(true);
-    try {
-      const response = await Api.getCharactersByQuery(query);
-      const data = await response.json();
+    const response = await Api.getCharactersByQuery(query);
+    const data = await response.json();
+    if (response.status === 200) {
       setCards(data.results);
-    } catch (e) {
-      if (e instanceof Error) {
-        setError(e.message);
-      }
-      console.log(e);
-    } finally {
       setIsLoading(false);
+      return Promise.resolve();
+    } else {
+      setError(error);
+      return Promise.reject();
     }
   };
 
@@ -53,17 +54,15 @@ const Main: FC = (): JSX.Element => {
   const showFullCard = async (id: number) => {
     setModal(true, '', ImodalTextType.success);
     setCardIsLoading(true);
-    try {
-      const response = await Api.getCharacterById(id);
-      const data = await response.json();
+    const response = await Api.getCharacterById(id);
+    const data = await response.json();
+    if (response.status === 200) {
       setActiveCard(data);
-    } catch (e) {
-      if (e instanceof Error) {
-        setError(e.message);
-      }
-      console.log(e);
-    } finally {
       setCardIsLoading(false);
+      return Promise.resolve();
+    } else {
+      setError(error);
+      return Promise.reject();
     }
   };
 
