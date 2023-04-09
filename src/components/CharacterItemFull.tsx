@@ -25,7 +25,7 @@ export type CharacterType = {
   image?: string;
   episode?: Array<string>;
   url?: string;
-  created?: string;
+  created?: string | Date | number;
 };
 
 function CharacterItemFull(props: Props): JSX.Element {
@@ -54,8 +54,16 @@ function CharacterItemFull(props: Props): JSX.Element {
           {props.card.status}
         </p>
         <p>
+          <strong>Gender: </strong>
+          {props.card.gender}
+        </p>
+        <p>
+          <strong>Location: </strong>
+          {props.card.location?.name}
+        </p>
+        <p>
           <strong>Created: </strong>
-          {props.card.created}
+          {props.card.created && new Date(props.card.created).toLocaleDateString()}
         </p>
         <div className={cl.episodes}>
           <p>
