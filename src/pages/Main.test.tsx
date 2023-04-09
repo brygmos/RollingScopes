@@ -1,7 +1,7 @@
 import { setupServer } from 'msw/node';
 import { expect, it, Mock } from 'vitest';
 import { handlers } from '../mocks/handlers';
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import React from 'react';
 import Main from './Main';
 import Api from '../../API';
@@ -22,7 +22,7 @@ global.fetch = vi.fn(() => {
 
 describe('fetch', () => {
   it('correctly get data', async () => {
-    render(<Main />);
+    await act(async () => render(<Main />));
     const response = await Api.getAllCharacters();
     const data = await response.json();
     expect(data.results[0].id).toEqual(20);
@@ -30,14 +30,14 @@ describe('fetch', () => {
     expect(data.results[0].name).toEqual('Ants in my Eyes Johnson');
   });
   it('correctly get data by user id', async () => {
-    render(<Main />);
+    await act(async () => render(<Main />));
     const response = await Api.getCharacterById(20);
     const data = await response.json();
     expect(data.id).toEqual(20);
     expect(data.name).toEqual('Ants in my Eyes Johnson');
   });
   it('correctly get data by query', async () => {
-    render(<Main />);
+    await act(async () => render(<Main />));
     const response = await Api.getCharactersByQuery('pibble');
     const data = await response.json();
     expect(data.results.length).toEqual(2);
