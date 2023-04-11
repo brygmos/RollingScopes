@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import cl from './styles/SeachBar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
@@ -9,48 +9,49 @@ type Props = {
 };
 
 const SearchBar = (props: Props) => {
-  const count = useSelector((state: RootState) => state.search.value);
+  const searchValue = useSelector((state: RootState) => state.search.value);
   const dispatch = useDispatch();
-  const [finder, setFinder] = useState(localStorage.getItem('finder') || '');
-  const searchValue = useRef('');
+  // const [finder, setFinder] = useState(localStorage.getItem('finder') || '');
+  // const searchValue = useRef('');
 
   useEffect(() => {
-    searchValue.current = finder;
-  }, [finder]);
+    // searchValue.current = finder;
+  }, [searchValue]);
   useEffect(() => {
     return () => {
-      localStorage.setItem('finder', searchValue.current);
+      // localStorage.setItem('finder', searchValue.current);
     };
   }, []);
 
   const keyHandler = (e: React.KeyboardEvent) => {
     if (e.key == 'Enter') {
-      find(searchValue.current);
+      find(searchValue);
     }
   };
 
   const find = (query: string) => {
-    localStorage.setItem('finder', searchValue.current);
+    localStorage.setItem('finder', searchValue);
     props.findQuery ? props.findQuery(query) : null;
   };
 
   return (
     <div className={cl.container}>
-      <button onClick={() => dispatch(setValue('test'))}>Increment</button>
       <label htmlFor="searchbar" hidden={true}>
         Search...
       </label>
       <input
         id={'searchbar'}
         className={cl.input}
-        value={finder}
+        value={searchValue}
         placeholder={'Search...'}
         type="text"
-        onChange={(e) => setFinder(e.currentTarget.value)}
+        onChange={(e) => dispatch(setValue(e.currentTarget.value))}
         onKeyDown={(event) => {
           keyHandler(event);
         }}
       />
+      <button onClick={() => find(searchValue)}>Search</button>
+      <button onClick={() => dispatch(clear())}>Clear</button>
     </div>
   );
 };

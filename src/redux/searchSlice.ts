@@ -7,7 +7,7 @@ export interface SearchState {
 }
 
 const initialState: SearchState = {
-  value: '',
+  value: localStorage.getItem('finder') || '',
   todos: [],
 };
 
