@@ -5,6 +5,8 @@ import { act, render } from '@testing-library/react';
 import React from 'react';
 import Main from './Main';
 import Api from '../../API';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
 
 const server = setupServer(...handlers);
 
@@ -22,7 +24,13 @@ global.fetch = vi.fn(() => {
 
 describe('fetch', () => {
   it('correctly get data', async () => {
-    await act(async () => render(<Main />));
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <Main />
+        </Provider>
+      )
+    );
     const response = await Api.getAllCharacters();
     const data = await response.json();
     expect(data.results[0].id).toEqual(20);
@@ -30,14 +38,26 @@ describe('fetch', () => {
     expect(data.results[0].name).toEqual('Ants in my Eyes Johnson');
   });
   it('correctly get data by user id', async () => {
-    await act(async () => render(<Main />));
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <Main />
+        </Provider>
+      )
+    );
     const response = await Api.getCharacterById(20);
     const data = await response.json();
     expect(data.id).toEqual(20);
     expect(data.name).toEqual('Ants in my Eyes Johnson');
   });
   it('correctly get data by query', async () => {
-    await act(async () => render(<Main />));
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <Main />
+        </Provider>
+      )
+    );
     const response = await Api.getCharactersByQuery('pibble');
     const data = await response.json();
     expect(data.results.length).toEqual(2);

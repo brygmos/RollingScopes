@@ -4,13 +4,17 @@ import React from 'react';
 import { describe, expect, it } from 'vitest';
 import { App } from './App';
 import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 describe('main', () => {
   it('Renders main page', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      </Provider>
     );
     expect(screen.getByPlaceholderText(/search.../i)).toBeTruthy();
   });
