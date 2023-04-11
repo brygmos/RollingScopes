@@ -19,7 +19,8 @@ const Main: FC = (): JSX.Element => {
   const [activeCard, setActiveCard] = useState<CharacterType | object>({});
 
   useEffect(() => {
-    initialQuery().then(null);
+    const value = localStorage.getItem('finder');
+    value ? findQuery(value).then(null) : initialQuery().then(null);
   }, []);
 
   const initialQuery = async () => {
