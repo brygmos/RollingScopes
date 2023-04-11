@@ -3,6 +3,8 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
 import { Header } from './components/Header';
 import './styles/App.css';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 export function App() {
   return (
@@ -16,7 +18,9 @@ export function App() {
 function RouterWrappedApp() {
   return (
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   );
 }

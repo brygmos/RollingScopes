@@ -1,11 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import cl from './styles/SeachBar.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { clear, setValue } from '../redux/searchSlice';
 
 type Props = {
   findQuery?: (query: string) => Promise<void>;
 };
 
 const SearchBar = (props: Props) => {
+  const count = useSelector((state: RootState) => state.search.value);
+  const dispatch = useDispatch();
   const [finder, setFinder] = useState(localStorage.getItem('finder') || '');
   const searchValue = useRef('');
 
@@ -31,6 +36,7 @@ const SearchBar = (props: Props) => {
 
   return (
     <div className={cl.container}>
+      <button onClick={() => dispatch(setValue('test'))}>Increment</button>
       <label htmlFor="searchbar" hidden={true}>
         Search...
       </label>
