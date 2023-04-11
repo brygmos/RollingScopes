@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import SearchBar from '../components/SearchBar';
 import { CharacterType } from '../components/CardItem';
 import CharacterList from '../components/CharactersList';
@@ -7,9 +7,11 @@ import CharacterItemFull from '../components/CharacterItemFull';
 import { ImodalTextType } from '../components/Form';
 import Loader from '../components/UI/Loader/Loader';
 import Api from '../../API';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setSearchResults } from '../redux/searchResultsSlice';
 
 const Main: FC = (): JSX.Element => {
-  const [cards, setCards] = useState<CharacterType[]>([]);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalText, setModalText] = useState('');
   const [error, setError] = useState<string>('');
@@ -18,25 +20,30 @@ const Main: FC = (): JSX.Element => {
   const [modalTextType, setModalTextType] = useState('neutral');
   const [activeCard, setActiveCard] = useState<CharacterType | object>({});
 
-  useEffect(() => {
-    initialQuery().then(null);
-  }, []);
+  const searchResults = useSelector((state: RootState) => state.searchResults.cards);
+  const dispatch = useDispatch();
 
-  const initialQuery = async () => {
+  // useCallback is for avoiding warning in useEffect
+  const initialQuery = useCallback(async () => {
     const response = await Api.getAllCharacters();
     const data = await response.json();
     if (response.status === 200) {
-      setCards(data.results);
+      dispatch(setSearchResults(data.results));
       setCardIsLoading(false);
     }
-  };
+  }, [dispatch]);
+
+  useEffect(() => {
+    initialQuery().then(null);
+  }, [initialQuery]);
 
   const findQuery = async (query: string) => {
     setIsLoading(true);
     try {
       const response = await Api.getCharactersByQuery(query);
       const data = await response.json();
-      setCards(data.results);
+      dispatch(setSearchResults(data.results));
+      // setCards(data.results);
       setIsLoading(false);
     } catch (e) {
       console.log(e);
@@ -90,12 +97,12 @@ const Main: FC = (): JSX.Element => {
       <SearchBar findQuery={findQuery} />
       {isLoading && <Loader />}
       <h1>{error}</h1>
-      {!cards ? (
+      {!searchResults ? (
         <div className={'container'}>
           <h1>Cards not found</h1>
         </div>
       ) : (
-        <CharacterList cards={cards} showFullCard={showFullCard} />
+        <CharacterList cards={searchResults} showFullCard={showFullCard} />
       )}
     </>
   );

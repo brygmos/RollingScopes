@@ -39,7 +39,14 @@ const SearchBar = (props: Props) => {
         }}
       />
       <button onClick={() => find(searchValue)}>Search</button>
-      <button onClick={() => dispatch(clear())}>Clear</button>
+      <button
+        onClick={() => {
+          dispatch(clear());
+          find('');
+        }}
+      >
+        Clear
+      </button>
     </div>
   );
 };

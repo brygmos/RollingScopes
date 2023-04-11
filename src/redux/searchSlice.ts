@@ -3,12 +3,10 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface SearchState {
   value: string;
-  todos: [];
 }
 
 const initialState: SearchState = {
   value: '',
-  todos: [],
 };
 
 export const searchSlice = createSlice({
