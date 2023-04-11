@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import cl from './styles/SeachBar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
@@ -11,17 +11,6 @@ type Props = {
 const SearchBar = (props: Props) => {
   const searchValue = useSelector((state: RootState) => state.search.value);
   const dispatch = useDispatch();
-  // const [finder, setFinder] = useState(localStorage.getItem('finder') || '');
-  // const searchValue = useRef('');
-
-  useEffect(() => {
-    // searchValue.current = finder;
-  }, [searchValue]);
-  useEffect(() => {
-    return () => {
-      // localStorage.setItem('finder', searchValue.current);
-    };
-  }, []);
 
   const keyHandler = (e: React.KeyboardEvent) => {
     if (e.key == 'Enter') {
@@ -30,7 +19,6 @@ const SearchBar = (props: Props) => {
   };
 
   const find = (query: string) => {
-    localStorage.setItem('finder', searchValue);
     props.findQuery ? props.findQuery(query) : null;
   };
 
