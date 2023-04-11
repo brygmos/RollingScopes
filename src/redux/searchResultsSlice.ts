@@ -11,7 +11,7 @@ const initialState: SearchResultsState = {
 };
 
 export const SearchResultsSlice = createSlice({
-  name: 'search',
+  name: 'searchResult',
   initialState,
   reducers: {
     // clear(state) {

@@ -4,11 +4,17 @@ import React from 'react';
 import { describe, expect, it } from 'vitest';
 
 import Form from './Form';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
 
 describe('Form', () => {
   it('render fields', () => {
     URL.createObjectURL = vi.fn().mockReturnValue('myMockUrl');
-    render(<Form formHandler={() => {}} lastId={0} />);
+    render(
+      <Provider store={store}>
+        <Form formHandler={() => {}} lastId={0} />
+      </Provider>
+    );
 
     expect(screen.getByPlaceholderText(/your name/i)).toHaveTextContent('');
     expect(screen.getByPlaceholderText(/surname/i)).toHaveTextContent('');
@@ -16,7 +22,11 @@ describe('Form', () => {
     expect(screen.getByText(/category/i)).toBeTruthy();
   });
   it('show input data', () => {
-    render(<Form formHandler={() => {}} lastId={0} />);
+    render(
+      <Provider store={store}>
+        <Form formHandler={() => {}} lastId={0} />
+      </Provider>
+    );
 
     const name = screen.getByPlaceholderText(/your name/i);
 
@@ -30,7 +40,11 @@ describe('Form', () => {
   });
 
   it('displays modal error message', async () => {
-    render(<Form formHandler={() => {}} lastId={0} />);
+    render(
+      <Provider store={store}>
+        <Form formHandler={() => {}} lastId={0} />
+      </Provider>
+    );
 
     const usernameInput = screen.getByPlaceholderText(/your name/i);
     fireEvent.change(usernameInput, { target: { value: 'a' } });
@@ -41,7 +55,11 @@ describe('Form', () => {
   });
 
   it('displays error message when name is empty', async () => {
-    const { getByText, getByPlaceholderText } = render(<Form formHandler={() => {}} lastId={0} />);
+    const { getByText, getByPlaceholderText } = render(
+      <Provider store={store}>
+        <Form formHandler={() => {}} lastId={0} />
+      </Provider>
+    );
     const usernameInput = getByPlaceholderText(/your name/i);
     fireEvent.change(usernameInput, { target: { value: '' } });
 

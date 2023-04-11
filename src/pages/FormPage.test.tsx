@@ -4,29 +4,43 @@ import React from 'react';
 import { describe, expect, it } from 'vitest';
 import { App } from '../App';
 import { MemoryRouter } from 'react-router-dom';
-import FormPage from './FormPage';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
 
 describe('FormPage', () => {
   it('renders form', () => {
     URL.createObjectURL = vi.fn().mockReturnValue('TODOmyMockUrl');
 
     render(
-      <MemoryRouter initialEntries={['/form']}>
-        <App />
-      </MemoryRouter>
+      <Provider store={store}>
+        {' '}
+        <MemoryRouter initialEntries={['/form']}>
+          <App />
+        </MemoryRouter>
+      </Provider>
     );
     expect(screen.getByRole('heading', { level: 1 })).toBeTruthy();
   });
   it('Title is not empty', () => {
-    render(<FormPage />);
+    render(
+      <Provider store={store}>
+        {' '}
+        <MemoryRouter initialEntries={['/form']}>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    );
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Form');
   });
   it('card was added, fields are empty', () => {
     render(
-      <MemoryRouter initialEntries={['/form']}>
-        <App />
-      </MemoryRouter>
+      <Provider store={store}>
+        {' '}
+        <MemoryRouter initialEntries={['/form']}>
+          <App />
+        </MemoryRouter>
+      </Provider>
     );
 
     const name = screen.getByPlaceholderText(/your name/i);

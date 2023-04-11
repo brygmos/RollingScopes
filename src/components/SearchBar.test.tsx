@@ -21,10 +21,8 @@ describe('SearchBar', () => {
         <SearchBar />
       </Provider>
     );
-
     const bar = screen.getByPlaceholderText(/search.../i);
     fireEvent.change(bar, { target: { value: 'abc' } });
-
     expect(bar).toHaveValue('abc');
   });
 });
