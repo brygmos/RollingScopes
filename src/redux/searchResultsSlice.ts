@@ -14,9 +14,6 @@ export const SearchResultsSlice = createSlice({
   name: 'searchResult',
   initialState,
   reducers: {
-    // clear(state) {
-    //   state.value = '';
-    // },
     setSearchResults(state, action: PayloadAction<CharacterType[]>) {
       state.cards = action.payload;
     },

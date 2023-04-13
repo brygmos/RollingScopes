@@ -1,31 +1,11 @@
 import React from 'react';
 import cl from './styles/CharacterItemFull.module.css';
 import CloseButton from './UI/CloseButton/CloseButton';
+import { CharacterType } from './CharacterItem';
 
 type Props = {
   card: CharacterType;
   closeModal?: () => void;
-};
-
-export type CharacterType = {
-  id?: number;
-  name?: string;
-  status?: string;
-  species?: string;
-  type?: string;
-  gender?: string;
-  origin?: {
-    name?: string;
-    url?: string;
-  };
-  location?: {
-    name?: string;
-    url?: string;
-  };
-  image?: string;
-  episode?: Array<string>;
-  url?: string;
-  created?: string | Date | number;
 };
 
 function CharacterItemFull(props: Props): JSX.Element {
