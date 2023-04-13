@@ -19,7 +19,7 @@ const SearchBar = (props: Props) => {
   };
 
   const find = (query: string) => {
-    props.findQuery ? props.findQuery(query) : null;
+    props.findQuery && props.findQuery(query);
   };
 
   return (

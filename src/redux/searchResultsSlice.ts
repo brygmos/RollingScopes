@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { CharacterType } from '../components/CardItem';
+import { CharacterType } from '../components/CharacterItem';
 
 export interface SearchResultsState {
   cards: CharacterType[];

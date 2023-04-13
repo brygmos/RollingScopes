@@ -1,14 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
+// import { setupListeners } from '@reduxjs/toolkit/query';
 import { searchSlice } from './searchSlice';
 import { SearchResultsSlice } from './searchResultsSlice';
 import { formSlice } from './formSlice';
+import { api } from './RTKQuery';
 
 export const store = configureStore({
   reducer: {
     search: searchSlice.reducer,
     searchResults: SearchResultsSlice.reducer,
     form: formSlice.reducer,
+    [api.reducerPath]: api.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

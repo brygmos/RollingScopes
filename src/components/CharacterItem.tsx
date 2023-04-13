@@ -27,6 +27,11 @@ export type CharacterType = {
   created: string;
 };
 
+export type AllCharactersResponceType = {
+  info: object;
+  results: CharacterType[];
+};
+
 function CharacterItem(props: Props): JSX.Element {
   return (
     <div
