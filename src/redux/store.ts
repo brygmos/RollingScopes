@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { searchSlice } from './searchSlice';
 import { SearchResultsSlice } from './searchResultsSlice';
 import { formSlice } from './formSlice';
-import { api } from './RTKQuery';
+import { api } from '../../API/RTKQuery';
 
 export const store = configureStore({
   reducer: {

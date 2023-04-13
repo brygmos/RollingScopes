@@ -6,7 +6,7 @@ import MyModal from '../components/MyModal';
 import CharacterItemFull from '../components/CharacterItemFull';
 import { ImodalTextType } from '../components/Form';
 import Loader from '../components/UI/Loader/Loader';
-import { useGetCharacterByIdQuery, useGetCharactersQuery } from '../redux/RTKQuery';
+import { useGetCharacterByIdQuery, useGetCharactersQuery } from '../../API/RTKQuery';
 
 const Main: FC = (): JSX.Element => {
   const [modalVisibility, setModalVisibility] = useState(false);
@@ -69,7 +69,9 @@ const Main: FC = (): JSX.Element => {
           <h1>Cards not found</h1>
         </div>
       )}
-      {characters && <CharacterList cards={characters.results} showFullCard={showFullCard} />}
+      {characters && !error && (
+        <CharacterList cards={characters.results} showFullCard={showFullCard} />
+      )}
     </>
   );
 };
