@@ -7,11 +7,14 @@ import CharacterItemFull from '../components/CharacterItemFull';
 import { ImodalTextType } from '../components/Form';
 import Loader from '../components/UI/Loader/Loader';
 import { useGetCharacterByIdQuery, useGetCharactersQuery } from '../../API/RTKQuery';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const Main: FC = (): JSX.Element => {
+  const searchValue = useSelector((state: RootState) => state.search.value);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalText, setModalText] = useState('');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(searchValue);
   const [modalTextType, setModalTextType] = useState('neutral');
   const [activeCard, setActiveCard] = useState<CharacterType>({} as CharacterType);
 
