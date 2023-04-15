@@ -1,19 +1,15 @@
 import React, { PropsWithChildren } from 'react';
 import { render } from '@testing-library/react';
-import type { RenderOptions } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
-import type { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-
-import type { AppStore, RootState } from './redux/store';
-// As a basic setup, import your same slice reducers
 import searchReducer from './redux/searchSlice';
 import searchResultsReducer from './redux/searchResultsSlice';
 import formReducer from './redux/formSlice';
 import { api } from '../API/RTKQuery';
+import type { RenderOptions } from '@testing-library/react';
+import type { PreloadedState } from '@reduxjs/toolkit';
+import type { AppStore, RootState } from './redux/store';
 
-// This type interface extends the default options for render from RTL, as well
-// as allows the user to specify other things such as initialState, store.
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>;
   store?: AppStore;

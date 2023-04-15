@@ -25,7 +25,6 @@ describe('App', function () {
       expect(screen.getByText(/Ants in my Eyes Johnson/i)).toBeInTheDocument();
     });
   });
-
   it('finds and shows found results', async () => {
     renderWithProviders(<RouterWrappedApp />);
     const input = screen.getByPlaceholderText(/search.../i);
@@ -35,7 +34,6 @@ describe('App', function () {
       expect(screen.getByText(/Pibbles Bodyguard/i)).toBeInTheDocument();
     });
   });
-
   it('shows full card', async () => {
     renderWithProviders(<RouterWrappedApp />);
     const input = screen.getByPlaceholderText(/search.../i);
