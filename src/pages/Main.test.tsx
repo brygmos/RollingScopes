@@ -5,7 +5,7 @@ import { handlers } from '../mocks/handlers';
 import { renderWithProviders } from '../testUtils';
 import RouterWrappedApp from '../App';
 import React from 'react';
-import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { it } from 'vitest';
 
 global.fetch = fetch;
@@ -18,6 +18,13 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
+const enterKeyEvent = new KeyboardEvent('keydown', {
+  bubbles: true,
+  cancelable: true,
+  key: 'Enter',
+  code: 'Enter',
+});
+
 describe('App', function () {
   it('shows init results', async () => {
     renderWithProviders(<RouterWrappedApp />);
@@ -29,7 +36,9 @@ describe('App', function () {
     renderWithProviders(<RouterWrappedApp />);
     const input = screen.getByPlaceholderText(/search.../i);
     fireEvent.change(input, { target: { value: 'some value' } });
-    fireEvent.click(screen.getByText('Search'));
+    act(() => {
+      input.dispatchEvent(enterKeyEvent);
+    });
     await waitFor(() => {
       expect(screen.getByText(/Pibbles Bodyguard/i)).toBeInTheDocument();
     });
@@ -38,7 +47,9 @@ describe('App', function () {
     renderWithProviders(<RouterWrappedApp />);
     const input = screen.getByPlaceholderText(/search.../i);
     fireEvent.change(input, { target: { value: 'fghgfjjg' } });
-    fireEvent.click(screen.getByText('Search'));
+    act(() => {
+      input.dispatchEvent(enterKeyEvent);
+    });
     await waitFor(() => {
       const card = screen.getByText(/Shrimply Pibbles/i);
       expect(card).toBeInTheDocument();

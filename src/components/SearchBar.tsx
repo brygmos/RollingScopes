@@ -2,7 +2,7 @@ import React from 'react';
 import cl from './styles/SeachBar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { clear, setValue } from '../redux/searchSlice';
+import { setValue } from '../redux/searchSlice';
 
 type Props = {
   findQuery?: (query: string) => Promise<void>;
@@ -38,15 +38,6 @@ const SearchBar = (props: Props) => {
           keyHandler(event);
         }}
       />
-      <button onClick={() => find(searchValue)}>Search</button>
-      <button
-        onClick={() => {
-          dispatch(clear());
-          find('');
-        }}
-      >
-        Clear
-      </button>
     </div>
   );
 };
