@@ -7,13 +7,11 @@ import { RootState } from '../redux/store';
 import { addCard } from '../redux/formSlice';
 
 const FormPage: FC = () => {
-  // const [cards, setCards] = useState<CardType[]>([]);
   const [lastId, setLastId] = useState(-1);
   const cards = useSelector((state: RootState) => state.form.cards);
   const dispatch = useDispatch();
 
   function formHandler(card: CardType): void {
-    // setCards([...cards, card]);
     dispatch(addCard(card));
     setLastId(cards.length);
   }

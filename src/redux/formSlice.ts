@@ -3,12 +3,10 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { CardType } from '../components/CardItem';
 
 export interface FormState {
-  value: string;
   cards: CardType[];
 }
 
 const initialState: FormState = {
-  value: '',
   cards: [],
 };
 

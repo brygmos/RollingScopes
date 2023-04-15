@@ -9,7 +9,7 @@ import type { AppStore, RootState } from './redux/store';
 // As a basic setup, import your same slice reducers
 import searchReducer from './redux/searchSlice';
 import searchResultsReducer from './redux/searchResultsSlice';
-import formReducer from './redux/searchSlice';
+import formReducer from './redux/formSlice';
 import { api } from '../API/RTKQuery';
 
 // This type interface extends the default options for render from RTL, as well

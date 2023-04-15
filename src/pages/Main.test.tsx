@@ -47,7 +47,7 @@ describe('App', function () {
     });
     fireEvent.click(screen.getByText(/Shrimply Pibbles/i));
     await waitFor(() => {
-      const fullCard = screen.getByText(/St. Gloopy Noops Hospital/i);
+      const fullCard = screen.getByText(/Human with ants in his eyes/i);
       expect(fullCard).toBeInTheDocument();
     });
   });
