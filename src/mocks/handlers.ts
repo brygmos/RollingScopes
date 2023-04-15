@@ -86,7 +86,7 @@ export const handlers = [
       );
     }
   }),
-  rest.get('https://rickandmortyapi.com/api/character/20', (req, res, ctx) => {
+  rest.get('https://rickandmortyapi.com/api/character/', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({

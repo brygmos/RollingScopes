@@ -1,67 +1,54 @@
+import '@testing-library/jest-dom';
+import { fetch, Headers, Request, Response } from 'cross-fetch';
 import { setupServer } from 'msw/node';
-import { expect, it, Mock } from 'vitest';
 import { handlers } from '../mocks/handlers';
-import { act, render } from '@testing-library/react';
+import { renderWithProviders } from '../testUtils';
+import RouterWrappedApp from '../App';
 import React from 'react';
-import Main from './Main';
-import { Provider } from 'react-redux';
-import { store } from '../redux/store';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
+import { it } from 'vitest';
 
-//TODO test main
+global.fetch = fetch;
+global.Headers = Headers;
+global.Request = Request;
+global.Response = Response;
 
-// const server = setupServer(...handlers);
-//
-// beforeAll(() => server.listen());
-// afterEach(() => server.resetHandlers());
-// afterAll(() => server.close());
-//
-// global.fetch = vi.fn(() => {
-//   Promise.resolve({
-//     json: () => {
-//       Promise.resolve(handlers).then((r) => console.log(r));
-//     },
-//   }).then((r) => console.log(r));
-// }) as Mock;
-//
-// describe('fetch', () => {
-//   it('correctly get data', async () => {
-//     await act(async () =>
-//       render(
-//         <Provider store={store}>
-//           <Main />
-//         </Provider>
-//       )
-//     );
-//     const response = await Api.getAllCharacters();
-//     const data = await response.json();
-//     expect(data.results[0].id).toEqual(20);
-//     expect(data.results.length).toEqual(1);
-//     expect(data.results[0].name).toEqual('Ants in my Eyes Johnson');
-//   });
-//   it('correctly get data by user id', async () => {
-//     await act(async () =>
-//       render(
-//         <Provider store={store}>
-//           <Main />
-//         </Provider>
-//       )
-//     );
-//     const response = await Api.getCharacterById(20);
-//     const data = await response.json();
-//     expect(data.id).toEqual(20);
-//     expect(data.name).toEqual('Ants in my Eyes Johnson');
-//   });
-//   it('correctly get data by query', async () => {
-//     await act(async () =>
-//       render(
-//         <Provider store={store}>
-//           <Main />
-//         </Provider>
-//       )
-//     );
-//     const response = await Api.getCharactersByQuery('pibble');
-//     const data = await response.json();
-//     expect(data.results.length).toEqual(2);
-//     expect(data.results[0].id).toEqual(263);
-//   });
-// });
+export const server = setupServer(...handlers);
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+describe('App', function () {
+  it('shows init results', async () => {
+    renderWithProviders(<RouterWrappedApp />);
+    await waitFor(() => {
+      expect(screen.getByText(/Ants in my Eyes Johnson/i)).toBeInTheDocument();
+    });
+  });
+
+  it('finds and shows found results', async () => {
+    renderWithProviders(<RouterWrappedApp />);
+    const input = screen.getByPlaceholderText(/search.../i);
+    fireEvent.change(input, { target: { value: 'some value' } });
+    fireEvent.click(screen.getByText('Search'));
+    await waitFor(() => {
+      expect(screen.getByText(/Pibbles Bodyguard/i)).toBeInTheDocument();
+    });
+  });
+
+  it('shows full card', async () => {
+    renderWithProviders(<RouterWrappedApp />);
+    const input = screen.getByPlaceholderText(/search.../i);
+    fireEvent.change(input, { target: { value: 'fghgfjjg' } });
+    fireEvent.click(screen.getByText('Search'));
+    await waitFor(() => {
+      const card = screen.getByText(/Shrimply Pibbles/i);
+      expect(card).toBeInTheDocument();
+    });
+    fireEvent.click(screen.getByText(/Shrimply Pibbles/i));
+    await waitFor(() => {
+      const fullCard = screen.getByText(/St. Gloopy Noops Hospital/i);
+      expect(fullCard).toBeInTheDocument();
+    });
+  });
+});

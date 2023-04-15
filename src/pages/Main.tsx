@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 
 const Main: FC = (): JSX.Element => {
-  const searchValue = useSelector((state: RootState) => state.search.value);
+  const searchValue = useSelector((state: RootState) => state?.search?.value);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalText, setModalText] = useState('');
   const [query, setQuery] = useState(searchValue);
