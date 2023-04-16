@@ -1,0 +1,53 @@
+.card{
+    border-radius: 20px;
+    color: #161616;
+    text-align: center;
+    height: auto;
+    max-height: 90vh;
+    max-width: 90vw;
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.episodes{
+    max-height: 100px;
+    overflow-y: scroll;
+    border: 1px solid white;
+}
+
+.card a{
+    color: white;
+}
+
+.card p{
+    margin: 10px;
+}
+
+.img{
+    border-radius: 20px;
+    width: auto;
+    height: auto;
+    min-height: 50px;
+}
+
+.textContent{
+    height: available;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    flex: 1;
+    color: white;
+    margin: 30px;
+}
+
+.header{
+    background-color: aqua;
+    padding: 10px;
+    border-radius: 20px;
+}

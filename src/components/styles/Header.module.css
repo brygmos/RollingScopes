@@ -1,0 +1,13 @@
+.header{
+    padding-top: 1vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 100%;
+}
+
+.headerTitle{
+    position: absolute;
+    left: 0;
+    top: 0;
+}

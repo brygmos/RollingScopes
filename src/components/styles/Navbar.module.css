@@ -1,0 +1,37 @@
+.navbar{
+    margin: 1vh 5vh;
+    /*background-color: #16ACC9;*/
+    background-color: aqua;
+    flex: 1;
+    height: 50px;
+    min-height: 40px;
+    border-radius: 10vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+}
+
+.navlink{
+    width: 100%;
+    text-align: center;
+    vertical-align: center;
+    font-size: 1.5em;
+    line-height: 50px;
+    color: black;
+}
+
+.navlink:hover{
+    text-decoration: none;
+    background-color: #b0ffff;
+}
+
+.navlink_active{
+    font-weight: bold;
+    width: 100%;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 5vh;
+    color: white;
+}
