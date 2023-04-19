@@ -5,5 +5,11 @@
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["server.ts"],
+  "exclude": ["vite.config.ts"],
+  "ts-node": { //added by me
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true,
+  }
 }

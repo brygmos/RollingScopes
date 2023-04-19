@@ -7,6 +7,7 @@ export function App() {
   return (
     <>
       <Header />
+      <p>hi from app tsx</p>
       <AppRouter />
     </>
   );
