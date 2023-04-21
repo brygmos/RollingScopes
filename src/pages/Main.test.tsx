@@ -3,7 +3,7 @@ import { fetch, Headers, Request, Response } from 'cross-fetch';
 import { setupServer } from 'msw/node';
 import { handlers } from '../mocks/handlers';
 import { renderWithProviders } from '../testUtils';
-import RouterWrappedApp from '../App';
+import { RouterWrappedApp } from '../App';
 import React from 'react';
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import { it } from 'vitest';

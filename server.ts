@@ -34,6 +34,7 @@ async function createServer() {
           pipe(res);
         },
         onAllReady() {
+          console.log('on all ready');
           res.write(html[0] + html[1]);
           res.end();
         },

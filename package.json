@@ -9,10 +9,12 @@
     "lint": "eslint src",
     "fix": "eslint --fix src",
     "test": "vitest --coverage",
-    "build": "npm run build:client && npm run build:server",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "prettier": "prettier --write .",
     "test:ui": "vitest --ui",
+
+    "buildssr": "npm run build:client && npm run build:server",
     "build:client": "vite build --outDir dist/client",
     "build:server": "vite build --outDir dist/server --ssr src/entry-server.tsx"
   },

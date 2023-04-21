@@ -3,6 +3,7 @@ import AppRouter from './components/AppRouter';
 import { Header } from './components/Header';
 
 import './styles/main.css';
+import { BrowserRouter } from 'react-router-dom';
 
 export function App() {
   return (
@@ -13,12 +14,12 @@ export function App() {
   );
 }
 
-// function RouterWrappedApp() {
-//   return (
-//     <BrowserRouter>
-//       <App />
-//     </BrowserRouter>
-//   );
-// }
-//
-// export default RouterWrappedApp;
+export function RouterWrappedApp() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
+
+export default RouterWrappedApp;
