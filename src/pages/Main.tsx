@@ -8,7 +8,7 @@ import { ImodalTextType } from '../components/Form';
 import Loader from '../components/UI/Loader/Loader';
 import { useGetCharacterByIdQuery, useGetCharactersQuery } from '../../API/RTKQuery';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store'
+import { RootState } from '../redux/store';
 
 const Main: FC = (): JSX.Element => {
   const searchValue = useSelector((state: RootState) => state?.search?.value);

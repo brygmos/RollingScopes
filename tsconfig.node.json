@@ -1,3 +1,19 @@
+//{
+//  "compilerOptions": {
+//    "composite": true,
+//    "module": "ESNext",
+//    "moduleResolution": "Node",
+//    "allowSyntheticDefaultImports": true
+//  },
+//  "include": ["server.ts"],
+//  "exclude": ["vite.config.ts"],
+//  "ts-node": { //added by me
+//    "esm": true,
+//    "experimentalSpecifierResolution": "node",
+//    "transpileOnly": true,
+//  }
+//}
+
 {
   "compilerOptions": {
     "composite": true,
@@ -5,11 +21,5 @@
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["server.ts"],
-  "exclude": ["vite.config.ts"],
-  "ts-node": { //added by me
-    "esm": true,
-    "experimentalSpecifierResolution": "node",
-    "transpileOnly": true,
-  }
+  "include": ["vite.config.ts"]
 }

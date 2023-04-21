@@ -15,11 +15,11 @@ type updateTitle = () => void;
 export class Header extends React.Component<ComponentProps, ComponentState> {
   constructor(props: ComponentProps) {
     super(props);
-    this.state = { title: location.pathname };
+    // this.state = { title: location.pathname };
   }
 
   updateTitle: updateTitle = (): void => {
-    this.setState({ title: location.pathname });
+    // this.setState({ title: location.pathname });
   };
 
   render(): React.ReactNode {

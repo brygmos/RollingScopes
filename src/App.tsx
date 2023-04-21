@@ -1,24 +1,24 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
 import { Header } from './components/Header';
+
+import './styles/main.css';
 
 export function App() {
   return (
     <>
       <Header />
-      <p>hi from app tsx</p>
       <AppRouter />
     </>
   );
 }
 
-function RouterWrappedApp() {
-  return (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-}
-
-export default RouterWrappedApp;
+// function RouterWrappedApp() {
+//   return (
+//     <BrowserRouter>
+//       <App />
+//     </BrowserRouter>
+//   );
+// }
+//
+// export default RouterWrappedApp;

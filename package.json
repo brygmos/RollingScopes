@@ -4,19 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "server": "ts-node --esm server.ts",
     "dev": "vite",
     "lint": "eslint src",
     "fix": "eslint --fix src",
     "test": "vitest --coverage",
-    "build": "tsc && vite build",
+    "build": "npm run build:client && npm run build:server",
     "preview": "vite preview",
     "prettier": "prettier --write .",
     "test:ui": "vitest --ui",
-
-    "devssr": "ts-node --esm server.ts",
     "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --config vite.server.config.ts --outDir dist/server --ssr src/entry-server.tsx",
-    "server": "ts-node --esm server.ts"
+    "build:server": "vite build --outDir dist/server --ssr src/entry-server.tsx"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
