@@ -29,12 +29,11 @@ async function createServer() {
 
       const { pipe } = await render(url, {
         onShellReady() {
-          console.log('onshellready');
+          console.log('shell');
           res.write(html[0]);
           pipe(res);
         },
         onAllReady() {
-          console.log('on all ready');
           res.write(html[0] + html[1]);
           res.end();
         },
@@ -46,7 +45,7 @@ async function createServer() {
     }
   });
 
-  app.listen(PORT, () => console.log('http://localhost:3000/'));
+  app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 }
 
 createServer();
