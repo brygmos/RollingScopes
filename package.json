@@ -19,8 +19,8 @@
     "cypress:open": "cypress open",
     "cypress:panel": "cypress open",
     "report": "npx nyc report --reporter=text-summary",
-    "cypress": "ts-node server.ts npx cypress run --e2e && npx nyc report && npx nyc report --reporter=text-summary",
-    "cypress:run": "cypress run --env coverage=true ",
+    "cypress": "npx cypress run --e2e && npx nyc report && npx nyc report --reporter=text-summary",
+    "cypress:run": "cypress run --env coverage=true && npx nyc report --reporter=text-summary",
     "cypress:coverage": "npx nyc report --reporter=text-summary"
   },
   "dependencies": {
