@@ -5,8 +5,6 @@ context('Network Requests', () => {
     cy.visit('https://example.cypress.io/commands/network-requests');
   });
 
-  // Manage HTTP requests in your app
-
   it('cy.request() - make an XHR request', () => {
     // https://on.cypress.io/request
     cy.request('https://jsonplaceholder.cypress.io/comments').should((response) => {
