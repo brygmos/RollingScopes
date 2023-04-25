@@ -20,6 +20,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) =>
   });
 
 export const store = setupStore();
+export const preloadedState = store.getState();
 
 setupListeners(store.dispatch);
 

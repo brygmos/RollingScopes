@@ -6,8 +6,14 @@ export interface SearchResultsState {
   cards: CharacterType[];
 }
 
+const fetchInitialState = async () => {
+  const response = await fetch('https://rickandmortyapi.com/api/character');
+  const data = await response.json();
+  return data.results;
+};
+
 const initialState: SearchResultsState = {
-  cards: [],
+  cards: await fetchInitialState(),
 };
 
 export const SearchResultsSlice = createSlice({

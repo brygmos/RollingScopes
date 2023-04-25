@@ -12,13 +12,14 @@ import { RootState } from '../redux/store';
 
 const Main: FC = (): JSX.Element => {
   const searchValue = useSelector((state: RootState) => state?.search?.value);
+  const characters = useSelector((state: RootState) => state?.searchResults?.cards);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalText, setModalText] = useState('');
   const [query, setQuery] = useState(searchValue);
   const [modalTextType, setModalTextType] = useState('neutral');
   const [activeCard, setActiveCard] = useState<CharacterType>({} as CharacterType);
 
-  const { data: characters, error, isFetching } = useGetCharactersQuery(query);
+  const { data: charactersFromApi, error, isFetching } = useGetCharactersQuery(query);
   const {
     data: characterItem,
     error: itemError,
@@ -72,8 +73,10 @@ const Main: FC = (): JSX.Element => {
           <h1>Cards not found</h1>
         </div>
       )}
-      {characters && !error && (
-        <CharacterList cards={characters.results} showFullCard={showFullCard} />
+      {!charactersFromApi && characters ? (
+        <CharacterList cards={characters} showFullCard={showFullCard} />
+      ) : (
+        !error && <CharacterList cards={charactersFromApi?.results} showFullCard={showFullCard} />
       )}
     </>
   );
