@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 import '@cypress/code-coverage/support';
-import { waitFor } from '@testing-library/react';
 
 describe('example to-do app', () => {
   beforeEach(() => {
@@ -14,7 +13,6 @@ describe('example to-do app', () => {
     cy.contains('Form');
   });
   it('renders init cards', () => {
-    // cy.get('.todo-list li').should('have.length', 2);
     cy.contains('Rick Sanchez');
     cy.contains('Morty Smith');
   });

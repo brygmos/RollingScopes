@@ -27,7 +27,6 @@ async function createServer() {
       const { render } = await vite.ssrLoadModule('/src/entry-server.tsx');
       const { pipe } = await render(url, {
         onShellReady() {
-          console.log('shell');
           res.write(html[0]);
           pipe(res);
         },

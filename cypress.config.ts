@@ -6,7 +6,7 @@ export default defineConfig({
   defaultCommandTimeout: 5000,
   env: {
     codeCoverage: {
-      exclude: 'cypress/**/*.*',
+      exclude: ['cypress/**/*.*', '2-advanced-examples/*.*'],
     },
   },
   e2e: {
