@@ -13,6 +13,7 @@ const fetchInitialState = async () => {
 };
 
 const initialState: SearchResultsState = {
+  // cards: [],
   cards: await fetchInitialState(),
 };
 
