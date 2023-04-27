@@ -11,10 +11,10 @@ describe('form', () => {
   });
   it('show error on invalid form submit', () => {
     cy.contains('Form');
-    //   cy.scrollTo('bottom');
-    //   // cy.get('input[placeholder="your name"]').type('test');
-    //   // cy.get('input[placeholder="your name"]').type('{enter}');
-    //   cy.contains('Create card').click();
-    //   cy.contains('invalid data');
+    cy.scrollTo('bottom');
+    // cy.get('input[placeholder="your name"]').type('test');
+    // cy.get('input[placeholder="your name"]').type('{enter}');
+    cy.contains('Create card').click();
+    cy.contains('invalid data');
   });
 });
