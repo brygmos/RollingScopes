@@ -12,6 +12,12 @@ describe('example to-do app', () => {
     cy.contains('About');
     cy.contains('Form');
   });
+  it('change pages', () => {
+    cy.contains('About').click();
+    cy.contains('About us');
+    cy.contains('Form').click();
+    cy.contains('Create card');
+  });
   it('renders init cards', () => {
     cy.contains('Rick Sanchez');
     cy.contains('Morty Smith');

@@ -37,8 +37,8 @@ async function createServer() {
               `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(initialState).replace(
                 /</g,
                 '\\u003c'
-              )}</script>` +
-              html[2]
+              )}</script>`
+            // + html[2]
           );
           res.end();
         },
