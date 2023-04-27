@@ -3,18 +3,26 @@ import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
-import { Store } from '@reduxjs/toolkit';
+import { RootState, setupStore } from './redux/store';
+import { PreloadedState } from '@reduxjs/toolkit';
 
-function entryClient(store: Store) {
+declare global {
+  interface Window {
+    __PRELOADED_STATE__?: PreloadedState<RootState>;
+  }
+}
+
+function entryClient() {
+  const storeByServer = setupStore(window.__PRELOADED_STATE__);
+  delete window.__PRELOADED_STATE__;
   ReactDOM.hydrateRoot(
     document.getElementById('root') as HTMLElement,
     <BrowserRouter>
-      <Provider store={store}>
+      <Provider store={storeByServer}>
         <App />
       </Provider>
     </BrowserRouter>
   );
 }
 
-entryClient(store);
+entryClient();

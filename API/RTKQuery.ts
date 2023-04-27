@@ -1,5 +1,15 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+  buildCreateApi,
+  coreModule,
+  fetchBaseQuery,
+  reactHooksModule,
+} from '@reduxjs/toolkit/query/react';
 import { AllCharactersResponceType, CharacterType } from '../src/components/CharacterItem';
+
+const createApi = buildCreateApi(
+  coreModule(),
+  reactHooksModule({ unstable__sideEffectsInRender: true })
+);
 
 export const api = createApi({
   reducerPath: 'api',
