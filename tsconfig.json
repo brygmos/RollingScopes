@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "outDir": "dist", //added by me
     "target": "esnext",
     "lib": ["dom", "esnext", "dom.iterable"],
-    "jsx": "react",
+    "jsx": "react-jsx", //changed by me
+    //"jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
     "noImplicitAny": true,
@@ -13,8 +15,18 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": "./src",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+
+    "useDefineForClassFields": true,
+    "allowJs": true, //changed by me
+    "isolatedModules": true,
+    "noEmit": true,
+    "types": ["vitest/globals", "node", "jest", "@testing-library/jest-dom"]
   },
-  "include": ["./src/**/*", "styled.d.ts", ".eslintrc.cjs"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "ts-node": { //added by me
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+  },
+  "include": ["./src/**/*", "styled.d.ts", ".eslintrc.cjs", "vite.config.ts"],
+  "references": [{ "path": "./tsconfig.node.json" }],
 }
