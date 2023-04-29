@@ -1,7 +1,9 @@
 ### RS School, week 6-7. SSR. ([@brygmos](https://github.com/brygmos))
 
-to run unit testing print **`npm run test`**
+run linting: **`npm run lint`**
 
-to run server print **`npm run server`**
+run unit tests: **`npm run test`**
 
-to run server and cypress-test print **`npm run server:cypress`**
+run server and e2e-tests (cypress): **`npm run server:cypress`**
+
+run server only: **`npm run server`**

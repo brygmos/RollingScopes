@@ -38,7 +38,6 @@ async function createServer() {
                 /</g,
                 '\\u003c'
               )}</script>`
-            // + html[2]
           );
           res.end();
         },

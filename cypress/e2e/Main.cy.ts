@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import '@cypress/code-coverage/support';
 
-describe('example to-do app', () => {
+describe('main page', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/');
   });

@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import '@cypress/code-coverage/support';
 
-describe('form', () => {
+describe('about page', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/about');
   });
