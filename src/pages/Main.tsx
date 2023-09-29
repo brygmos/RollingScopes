@@ -9,6 +9,7 @@ import Loader from '../components/UI/Loader/Loader';
 import { useGetCharacterByIdQuery, useGetCharactersQuery } from '../../API/RTKQuery';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import Pagination from '../components/Pagination';
 
 const Main: FC = (): JSX.Element => {
   const searchValue = useSelector((state: RootState) => state?.search?.value);
@@ -16,10 +17,11 @@ const Main: FC = (): JSX.Element => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [modalText, setModalText] = useState('');
   const [query, setQuery] = useState(searchValue);
+  const [page, setPage] = useState(1);
   const [modalTextType, setModalTextType] = useState('neutral');
   const [activeCard, setActiveCard] = useState<CharacterType>({} as CharacterType);
 
-  const { data: charactersFromApi, error, isFetching } = useGetCharactersQuery(query);
+  const { data: charactersFromApi, error, isFetching } = useGetCharactersQuery({ query, page });
   const {
     data: characterItem,
     error: itemError,
@@ -78,6 +80,13 @@ const Main: FC = (): JSX.Element => {
       ) : (
         !error && <CharacterList cards={charactersFromApi?.results} showFullCard={showFullCard} />
       )}
+      <Pagination
+        count={40}
+        activePage={page}
+        changePage={(page) => {
+          setPage(page);
+        }}
+      />
     </>
   );
 };
