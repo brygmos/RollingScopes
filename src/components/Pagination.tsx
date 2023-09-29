@@ -10,10 +10,12 @@ type Props = {
 
 const Pagination = ({ count, activePage, changePage, limit = 10 }: Props) => {
   const pagesArray: number[] = fillArr(count);
+
   const [first, setFirst] = useState(pagesArray[0]);
   const [last, setLast] = useState(limit);
   const [center, setCenter] = useState(Math.floor(last / 2));
 
+  const edgeButtonsFlag = count >= limit;
   const resultArray: number[] = pagesArray.slice(first - 1, last);
 
   function moveToEnd() {
@@ -54,14 +56,18 @@ const Pagination = ({ count, activePage, changePage, limit = 10 }: Props) => {
     }
   }, [activePage]);
 
+  if (count <= 1) return null;
+
   return (
     <div className={cl.pagination__wrapper}>
-      <div
-        onClick={moveToStart}
-        className={activePage === 1 ? cl.page_wrapper_disabled : cl.page_wrapper}
-      >
-        <span className={activePage === 1 ? cl.page_disabled : cl.page}>{'В начало'}</span>
-      </div>
+      {edgeButtonsFlag && (
+        <div
+          onClick={moveToStart}
+          className={activePage === 1 ? cl.page_wrapper_disabled : cl.page_wrapper}
+        >
+          <span className={activePage === 1 ? cl.page_disabled : cl.page}>{'В начало'}</span>
+        </div>
+      )}
       {resultArray.map((p) => {
         return (
           <div
@@ -73,12 +79,14 @@ const Pagination = ({ count, activePage, changePage, limit = 10 }: Props) => {
           </div>
         );
       })}
-      <div
-        onClick={moveToEnd}
-        className={activePage === count ? cl.page_wrapper_disabled : cl.page_wrapper}
-      >
-        <span className={activePage === count ? cl.page_disabled : cl.page}>{'В конец'}</span>
-      </div>
+      {edgeButtonsFlag && (
+        <div
+          onClick={moveToEnd}
+          className={activePage === count ? cl.page_wrapper_disabled : cl.page_wrapper}
+        >
+          <span className={activePage === count ? cl.page_disabled : cl.page}>{'В конец'}</span>
+        </div>
+      )}
     </div>
   );
 };

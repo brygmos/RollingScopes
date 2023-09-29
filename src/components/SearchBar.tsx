@@ -3,6 +3,7 @@ import cl from './styles/SeachBar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { setValue } from '../redux/searchSlice';
+import CloseButton from './UI/CloseButton/CloseButton';
 
 type Props = {
   findQuery?: (query: string) => Promise<void>;
@@ -36,6 +37,13 @@ const SearchBar = (props: Props) => {
         onChange={(e) => dispatch(setValue(e.currentTarget.value))}
         onKeyDown={(event) => {
           keyHandler(event);
+        }}
+      ></input>
+      <CloseButton
+        className="search_closeButton"
+        onClick={() => {
+          dispatch(setValue(''));
+          find('');
         }}
       />
     </div>

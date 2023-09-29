@@ -26,3 +26,10 @@ h1{
 .successMessage{
   color: #01e001;
 }
+
+.search_closeButton{
+  position: absolute;
+  right: 55px;
+  top: 20px;
+  background-color: #161616;
+}

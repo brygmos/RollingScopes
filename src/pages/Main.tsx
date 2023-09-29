@@ -30,6 +30,7 @@ const Main: FC = (): JSX.Element => {
 
   const findQuery = async (query: string) => {
     setQuery(query);
+    setPage(1);
   };
 
   function setModal(visible: boolean, text = '', type: ImodalTextType) {
@@ -81,7 +82,7 @@ const Main: FC = (): JSX.Element => {
         !error && <CharacterList cards={charactersFromApi?.results} showFullCard={showFullCard} />
       )}
       <Pagination
-        count={charactersFromApi?.info.pages || 10}
+        count={error ? 0 : charactersFromApi?.info.pages || 10}
         activePage={page}
         changePage={(page) => {
           setPage(page);
