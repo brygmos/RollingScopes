@@ -81,7 +81,7 @@ const Main: FC = (): JSX.Element => {
         !error && <CharacterList cards={charactersFromApi?.results} showFullCard={showFullCard} />
       )}
       <Pagination
-        count={40}
+        count={charactersFromApi?.info.pages || 10}
         activePage={page}
         changePage={(page) => {
           setPage(page);
