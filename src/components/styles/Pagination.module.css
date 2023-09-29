@@ -1,0 +1,47 @@
+.pagination__wrapper {
+    margin: 20px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 700px;
+    min-width: 500px;
+}
+
+.page, .page__current, .page_disabled{
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.page_disabled {
+    cursor: default;
+    opacity: 0.5;
+}
+
+.page__current{
+    cursor: default;
+}
+
+.page_wrapper, .page_wrapper__current, .page_wrapper__disabled {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    min-width: 40px;
+    height: 40px;
+}
+
+.page_wrapper:hover {
+    background: aqua;
+}
+
+.page_wrapper__current {
+    cursor: default;
+    background: #74ff83;
+    color: black;
+}
+
+.page_wrapper__disabled {
+    cursor: default;
+    background: none;
+}

@@ -28,8 +28,15 @@ export type CharacterType = {
 };
 
 export type AllCharactersResponceType = {
-  info: object;
+  info: Info;
   results: CharacterType[];
+};
+
+export type Info = {
+  count: number;
+  pages: number;
+  next: string;
+  prev: string;
 };
 
 function CharacterItem(props: Props): JSX.Element {
