@@ -1,13 +1,25 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
+import { Header } from './components/Header';
 
-function App() {
+import './styles/main.css';
+import { BrowserRouter } from 'react-router-dom';
+
+export function App() {
+  return (
+    <>
+      <Header />
+      <AppRouter />
+    </>
+  );
+}
+
+export function RouterWrappedApp() {
   return (
     <BrowserRouter>
-      <AppRouter />
+      <App />
     </BrowserRouter>
   );
 }
 
-export default App;
+export default RouterWrappedApp;
