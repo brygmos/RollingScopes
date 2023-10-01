@@ -6,17 +6,21 @@
   "scripts": {
     "server": "ts-node --esm server.ts",
     "server:cypress": "start-server-and-test server http://localhost:3000 cypress:run",
+
     "dev": "vite",
+    "preview": "vite preview",
+
     "lint": "eslint src",
     "fix": "eslint --fix src",
-    "test": "vitest --coverage",
-    "preview": "vite preview",
     "prettier": "prettier --write .",
+    "test": "vitest --coverage",
     "test:ui": "vitest --ui",
+
     "build": "tsc && vite build",
     "buildssr": "npm run build:client && npm run build:server",
     "build:client": "vite build --outDir dist/client",
     "build:server": "vite build --outDir dist/server --ssr src/entry-server.tsx",
+
     "cypress:open": "cypress open",
     "cypress:panel": "cypress open",
     "report": "npx nyc report --reporter=text-summary",

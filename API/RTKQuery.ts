@@ -19,7 +19,7 @@ export const api = createApi({
     getCharacterById: builder.query<CharacterType, number>({
       query: (id = 1) => `character/${id}`,
     }),
-    getCharacters: builder.query<AllCharactersResponceType, { query: string; page: number }>({
+    getCharacters: builder.query<AllCharactersResponceType, { query?: string; page?: number }>({
       query: ({ query = '', page = 1 }) => ({
         url: 'character',
         params: { name: query, page: page },

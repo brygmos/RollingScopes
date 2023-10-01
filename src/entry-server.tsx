@@ -10,7 +10,7 @@ export async function render(
   context: RenderToPipeableStreamOptions
 ) {
   const store = setupStore();
-  store.dispatch(api.endpoints.getCharacters.initiate(''));
+  store.dispatch(api.endpoints.getCharacters.initiate({ query: '', page: 1 }));
   await Promise.all(store.dispatch(api.util.getRunningQueriesThunk()));
 
   return [
