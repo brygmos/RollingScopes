@@ -55,7 +55,7 @@ const Pagination = ({ count, activePage, changePage, limit = isMobile ? 5 : 10 }
       setLast(last - diff > limit ? last - diff : limit);
       setCenter((prevState) => prevState - diff);
     }
-  }, [activePage]);
+  }, [activePage, center, count, first, last, limit]);
 
   if (count <= 1) return null;
 
