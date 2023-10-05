@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import cl from './styles/Pagination.module.css';
+import { BrowserView, MobileView, isMobile } from 'react-device-detect';
 
 type Props = {
   count: number;
@@ -8,14 +9,14 @@ type Props = {
   changePage: (page: number) => void;
 };
 
-const Pagination = ({ count, activePage, changePage, limit = 10 }: Props) => {
+const Pagination = ({ count, activePage, changePage, limit = isMobile ? 5 : 10 }: Props) => {
   const pagesArray: number[] = fillArr(count);
 
   const [first, setFirst] = useState(pagesArray[0]);
   const [last, setLast] = useState(limit);
   const [center, setCenter] = useState(Math.floor(last / 2));
-
   const edgeButtonsFlag = count >= limit;
+
   const resultArray: number[] = pagesArray.slice(first - 1, last);
 
   function moveToEnd() {
@@ -58,35 +59,64 @@ const Pagination = ({ count, activePage, changePage, limit = 10 }: Props) => {
 
   if (count <= 1) return null;
 
+  const edgeButtonLeft = (
+    <div
+      onClick={moveToStart}
+      className={activePage === 1 ? cl.page_wrapper_disabled : cl.page_wrapper}
+    >
+      <span className={activePage === 1 ? cl.page_disabled : cl.page}>{'В начало'}</span>
+    </div>
+  );
+
+  const edgeButtonRight = (
+    <div
+      onClick={moveToEnd}
+      className={activePage === count ? cl.page_wrapper_disabled : cl.page_wrapper}
+    >
+      <span className={activePage === count ? cl.page_disabled : cl.page}>{'В конец'}</span>
+    </div>
+  );
+
   return (
-    <div className={cl.pagination__wrapper}>
-      {edgeButtonsFlag && (
-        <div
-          onClick={moveToStart}
-          className={activePage === 1 ? cl.page_wrapper_disabled : cl.page_wrapper}
-        >
-          <span className={activePage === 1 ? cl.page_disabled : cl.page}>{'В начало'}</span>
+    <div>
+      <BrowserView>
+        <div className={cl.pagination__wrapper}>
+          {edgeButtonLeft}
+          {resultArray.map((p) => {
+            return (
+              <div
+                onClick={() => changePage(p)}
+                className={activePage === p ? cl.page_wrapper__current : cl.page_wrapper}
+                key={p + 'page'}
+              >
+                <span className={activePage === p ? cl.page__current : cl.page}>{p}</span>
+              </div>
+            );
+          })}
+          {edgeButtonRight}
         </div>
-      )}
-      {resultArray.map((p) => {
-        return (
-          <div
-            onClick={() => changePage(p)}
-            className={activePage === p ? cl.page_wrapper__current : cl.page_wrapper}
-            key={p + 'page'}
-          >
-            <span className={activePage === p ? cl.page__current : cl.page}>{p}</span>
+      </BrowserView>
+      <MobileView>
+        <div className={cl.pagination__wrapper}>
+          {resultArray.map((p) => {
+            return (
+              <div
+                onClick={() => changePage(p)}
+                className={activePage === p ? cl.page_wrapper__current : cl.page_wrapper}
+                key={p + 'page'}
+              >
+                <span className={activePage === p ? cl.page__current : cl.page}>{p}</span>
+              </div>
+            );
+          })}
+        </div>
+        {edgeButtonsFlag && (
+          <div className={cl.edgeButtonsMobileContainer}>
+            {edgeButtonLeft}
+            {edgeButtonRight}
           </div>
-        );
-      })}
-      {edgeButtonsFlag && (
-        <div
-          onClick={moveToEnd}
-          className={activePage === count ? cl.page_wrapper_disabled : cl.page_wrapper}
-        >
-          <span className={activePage === count ? cl.page_disabled : cl.page}>{'В конец'}</span>
-        </div>
-      )}
+        )}
+      </MobileView>
     </div>
   );
 };
