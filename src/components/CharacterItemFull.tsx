@@ -2,6 +2,7 @@ import React from 'react';
 import cl from './styles/CharacterItemFull.module.css';
 import CloseButton from './UI/CloseButton/CloseButton';
 import { CharacterType } from './CharacterItem';
+import Episodes from './Episodes';
 
 type Props = {
   card: CharacterType;
@@ -45,18 +46,7 @@ function CharacterItemFull(props: Props): JSX.Element {
           <strong>Created: </strong>
           {props.card.created && new Date(props.card.created).toLocaleDateString()}
         </p>
-        <div className={cl.episodes}>
-          <p>
-            <strong>Episodes:</strong>
-          </p>
-          {props.card.episode?.map((episode) => (
-            <p key={episode}>
-              <a href={episode} target={'_blank'} rel="noreferrer">
-                <i>{episode}</i>
-              </a>
-            </p>
-          ))}
-        </div>
+        <Episodes episodes={props.card.episode} />
       </div>
     </div>
   );

@@ -4,7 +4,8 @@ import {
   fetchBaseQuery,
   reactHooksModule,
 } from '@reduxjs/toolkit/query/react';
-import { AllCharactersResponceType, CharacterType } from '../src/components/CharacterItem';
+import { AllCharactersResponseType, CharacterType } from '../src/components/CharacterItem';
+import { AllEpisodesResponseType, EpisodeType } from '../src/pages/EpisodePage';
 
 const createApi = buildCreateApi(
   coreModule(),
@@ -19,12 +20,26 @@ export const api = createApi({
     getCharacterById: builder.query<CharacterType, number>({
       query: (id = 1) => `character/${id}`,
     }),
-    getCharacters: builder.query<AllCharactersResponceType, { query?: string; page?: number }>({
+    getCharacters: builder.query<AllCharactersResponseType, { query?: string; page?: number }>({
       query: ({ query = '', page = 1 }) => ({
         url: 'character',
         params: { name: query, page: page },
       }),
     }),
+    getEpisodeById: builder.query<EpisodeType, number>({
+      query: (id = 1) => `episode/${id}`,
+    }),
+    getEpisodes: builder.query<AllEpisodesResponseType, { query?: string; page?: number }>({
+      query: ({ query = '', page = 1 }) => ({
+        url: 'episode',
+        params: { name: query, page: page },
+      }),
+    }),
   }),
 });
-export const { useGetCharacterByIdQuery, useGetCharactersQuery } = api;
+export const {
+  useGetCharacterByIdQuery,
+  useGetCharactersQuery,
+  useGetEpisodeByIdQuery,
+  useGetEpisodesQuery,
+} = api;

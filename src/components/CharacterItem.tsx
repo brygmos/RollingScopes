@@ -27,7 +27,7 @@ export type CharacterType = {
   created?: string | Date | number;
 };
 
-export type AllCharactersResponceType = {
+export type AllCharactersResponseType = {
   info: Info;
   results: CharacterType[];
 };

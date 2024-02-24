@@ -30,7 +30,7 @@ const MyModal: FC<Props> = ({
               e.stopPropagation();
             }}
           >
-            <h1 className={cl[messageType]}>{modalText}</h1>
+            {/*<h1 className={cl[messageType]}>{modalText}</h1>*/}
             {children}
           </div>
         </div>

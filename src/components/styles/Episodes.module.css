@@ -1,0 +1,16 @@
+.title {
+    cursor: pointer;
+}
+
+.title svg {
+    vertical-align: middle;
+}
+
+.title svg:hover {
+    color: white;
+}
+
+.list {
+    max-height: 400px;
+    overflow-y: scroll;
+}

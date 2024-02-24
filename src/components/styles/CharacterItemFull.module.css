@@ -1,27 +1,31 @@
 .card{
-    border-radius: 20px;
-    color: #161616;
-    text-align: center;
-    height: auto;
-    max-height: 90vh;
-    max-width: 90vw;
-    width: auto;
+    /*border-radius: 20px;*/
+    /*color: #161616;*/
+    /*height: auto;*/
+    /*max-height: 90vh;*/
+    /*max-width: 90vw;*/
+    /*width: auto;*/
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    /*justify-content: center;*/
+    align-items: flex-start;
     position: relative;
+    /*overflow-y: scroll;*/
 }
 
 .episodes{
     max-height: 100px;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     border: 1px solid white;
 }
 
 .card a{
     color: white;
+}
+
+.card a:hover{
+    color: cyan;
 }
 
 .card p{
@@ -36,18 +40,19 @@
 }
 
 .textContent{
-    height: available;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
     flex: 1;
     color: white;
-    margin: 30px;
+    margin: 0 30px 30px;
 }
 
 .header{
     background-color: aqua;
     padding: 10px;
     border-radius: 20px;
+    text-align: center;
 }
