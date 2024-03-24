@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 // import cl from '../components/styles/CharacterItemFull.module.css';
 import { CharacterType, Info } from '../components/CharacterItem';
@@ -8,7 +8,9 @@ import {
   useGetEpisodeByIdQuery,
   useGetEpisodesQuery,
 } from '../../API/RTKQuery';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Pagination from '../components/Pagination';
+// import Episodes from '../components/Episodes';
 
 export type EpisodeType = {
   id?: number;
@@ -25,10 +27,19 @@ export type AllEpisodesResponseType = {
   results: EpisodeType[];
 };
 
+function useQuery() {
+  const { search } = useLocation();
+  console.log(search);
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 const Episodes: FC = (): JSX.Element => {
+  const query = useQuery();
+  const [page, setPage] = useState(Number(query.get('page')) || 1);
   const navigate = useNavigate();
   const { episodeNumber, setEpisodeNumber } = useParams();
-  const { data: episodesFromApi, error, isFetching } = useGetEpisodesQuery({});
+  const { data: episodesFromApi, error, isFetching } = useGetEpisodesQuery({ page: page });
   const {
     data: characterItem,
     error: itemError,
@@ -39,6 +50,7 @@ const Episodes: FC = (): JSX.Element => {
     <div className={'container'}>
       <h1>Episode {episodeNumber}</h1>
       <a
+        style={{ color: 'white' }}
         href={'#'}
         onClick={() => {
           navigate('../episodes');
@@ -51,10 +63,14 @@ const Episodes: FC = (): JSX.Element => {
   ) : (
     <div className={'container'}>
       <h1>Episodes</h1>
+      {query.has('page') && <h1> {query.get('page')}</h1>}
+
+      {/*<Episodes episodes={episodesFromApi} />*/}
       {episodesFromApi &&
         episodesFromApi?.results.map((episode) => (
           <p key={episode.id}>
             <Link
+              style={{ color: 'white' }}
               to={{
                 pathname: `/episodes/${episode.url.slice(40)}`,
               }}
@@ -63,6 +79,15 @@ const Episodes: FC = (): JSX.Element => {
             </Link>
           </p>
         ))}
+      <Pagination
+        count={error ? 0 : episodesFromApi?.info?.pages || 10}
+        activePage={page}
+        changePage={(page) => {
+          setPage(page);
+          query.set('page', page.toString());
+          navigate('../episodes' + '?page=' + page);
+        }}
+      />
     </div>
   );
 };
