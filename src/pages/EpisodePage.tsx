@@ -49,21 +49,24 @@ const Episodes: FC = (): JSX.Element => {
   return episodeNumber?.length ? (
     <div className={'container'}>
       <h1>Episode {episodeNumber}</h1>
-      <a
-        style={{ color: 'white' }}
-        href={'#'}
-        onClick={() => {
-          navigate('../episodes');
-        }}
-      >
-        ←To episodes
-      </a>
+      <p>
+        <a
+          style={{ color: 'white' }}
+          href={'#'}
+          onClick={() => {
+            navigate('../episodes');
+          }}
+        >
+          ←To episodes
+        </a>
+      </p>
       {characterItem && <p>{characterItem.name}</p>}
+      {characterItem && <p>{characterItem.air_date}</p>}
     </div>
   ) : (
     <div className={'container'}>
       <h1>Episodes</h1>
-      {query.has('page') && <h1> {query.get('page')}</h1>}
+      {query.has('page') && <h2>Page {query.get('page')}</h2>}
 
       {/*<Episodes episodes={episodesFromApi} />*/}
       {episodesFromApi &&
@@ -80,7 +83,7 @@ const Episodes: FC = (): JSX.Element => {
           </p>
         ))}
       <Pagination
-        count={error ? 0 : episodesFromApi?.info?.pages || 10}
+        count={error ? 0 : episodesFromApi?.info?.pages || 1}
         activePage={page}
         changePage={(page) => {
           setPage(page);

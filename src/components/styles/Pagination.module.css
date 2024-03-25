@@ -1,11 +1,11 @@
 .pagination__wrapper {
     margin: 20px auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     max-width: 700px;
     width: 100%;
-    min-width: 390px;
+    min-width: 190px;
 }
 
 .page, .page__current, .page_disabled{
@@ -30,6 +30,7 @@
     border-radius: 50px;
     height: 40px;
     min-width: 40px;
+    margin: 0 5px;
 }
 
 .page_wrapper:hover {
